@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>وقاية النبات · توجه مبيدات الآفات</title>
 <meta name="description" content="برنامج وقاية النبات (توجه مبيدات الآفات) · قسم مبيدات الآفات · كلية الزراعة · جامعة المنوفية">
 <meta property="og:title" content="برنامج وقاية النبات · توجه مبيدات الآفات">
@@ -21,11 +21,11 @@
   --display:'Alexandria',sans-serif; --body:'IBM Plex Sans Arabic',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.8;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 #fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
-.wrap{max-width:720px;margin:0 auto;padding:0 24px 0 54px;position:relative;z-index:1}
+.wrap{max-width:720px;margin:0 auto;padding:0 max(26px,env(safe-area-inset-right)) 0 max(58px,calc(env(safe-area-inset-left) + 40px));position:relative;z-index:1}
 section,header,footer,.end{position:relative;z-index:1}
 
 /* ================= HERO ================= */
@@ -37,7 +37,7 @@ section,header,footer,.end{position:relative;z-index:1}
 .hero::after{content:"";position:absolute;left:0;right:0;height:120px;top:-120px;pointer-events:none;
   background:linear-gradient(to bottom,transparent,rgba(198,234,75,.07),transparent);animation:sweep 2.2s .1s ease-in-out both}
 @keyframes sweep{to{top:110%}}
-.top{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);padding:0 18px;position:relative;z-index:2;opacity:0;animation:up .8s .1s forwards}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:12px;color:var(--muted);padding:max(6px,env(safe-area-inset-top)) max(26px,env(safe-area-inset-right)) 0 max(26px,env(safe-area-inset-left));position:relative;z-index:2;opacity:0;animation:up .8s .1s forwards}
 .brand{display:flex;align-items:center;gap:10px;line-height:1.45}
 .brand b{color:var(--text);font-weight:500}
 .brand img,.brand svg{width:46px;height:46px;border-radius:50%;background:#fff;box-shadow:0 0 0 1px var(--line),0 6px 18px rgba(0,0,0,.35);flex:0 0 46px}
@@ -85,7 +85,7 @@ section,header,footer,.end{position:relative;z-index:1}
 @keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
 /* ================= GROWTH RAIL ================= */
-.rail{position:fixed;left:18px;top:12vh;bottom:12vh;width:16px;z-index:20;opacity:0;transition:opacity .5s}
+.rail{position:fixed;left:max(20px,env(safe-area-inset-left));top:12vh;bottom:12vh;width:16px;z-index:20;opacity:0;transition:opacity .5s}
 .rail.show{opacity:1}
 .rail .bgl{position:absolute;left:7px;top:0;bottom:0;width:2px;background:var(--line);border-radius:2px}
 .rail .stem{position:absolute;left:6px;bottom:0;width:4px;height:0;border-radius:4px;background:linear-gradient(to top,var(--leaf),var(--lime));box-shadow:0 0 10px rgba(198,234,75,.35)}
@@ -437,6 +437,44 @@ footer{border-top:1px solid var(--line);padding:22px 24px 34px;text-align:center
 /* tap burst */
 .burst{position:fixed;width:10px;height:6px;background:var(--leaf);border-radius:0 100% 0 100%;pointer-events:none;z-index:50}
 
+@media (max-width:480px){
+  body{font-size:15px}
+  .brand{gap:8px;font-size:11.5px}
+  .brand img,.brand svg{width:40px;height:40px;flex-basis:40px}
+  .hero h1{font-size:clamp(30px,9vw,40px)}
+  .tag{font-size:17px}
+  section.stage{padding:76px 0 30px}
+  h2{font-size:clamp(24px,7vw,30px);margin-bottom:12px}
+  h2 small{font-size:13px}
+  .lead{font-size:15.5px}
+  .lead.big{font-size:clamp(19px,5.4vw,22px)}
+  .stat b{font-size:26px}.stat span{font-size:12px}
+  .objs li,.ocard p,.lab-card p,.jy-card p,.rule p{font-size:13.5px}
+  .ocard h3,.lab-card h3,.jy-card h3{font-size:16.5px}
+  .mbtn{font-size:11.5px;padding:9px 2px}.mbtn i{font-size:20px}
+  .lab-card ul{font-size:13px}
+  .rung{font-size:10.5px}.rung b{font-size:11.5px}
+  .crs,.fc .nm{font-size:14px}
+  .fc{height:124px}
+  .pbtn{font-size:12px;padding:7px 8px;gap:6px}.pbtn i{font-size:16px}
+  .ppe-top b{font-size:15.5px}
+  .q{font-size:15.5px}
+  .opt{font-size:13.5px;padding:11px 12px}
+  .gbtn{font-size:13.5px}
+  .jy-ctrl .gbtn{font-size:12.5px;padding:10px 6px}
+  .lvbtn b{font-size:15px}.lvbtn span{font-size:12px}
+  .end h3{font-size:clamp(26px,8vw,34px)}
+  .seal{width:96px;height:96px}
+}
+@media (max-width:360px){
+  .wrap{padding-right:20px;padding-left:48px}
+  .top{padding-left:18px;padding-right:18px}
+  .rail{left:14px}
+  .methods{gap:4px;padding:10px}
+  .mbtn{font-size:10.5px}
+  .ppe-body{grid-template-columns:38% 1fr}
+  .cgrid{gap:8px}
+}
 @media (min-width:600px){.grid{grid-template-columns:1fr 1fr}.stats{grid-template-columns:repeat(4,1fr)}}
 @media (min-width:760px){.wrap{padding:0 28px}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal,.crs,h2 .w{opacity:1;transform:none;filter:none}}
