@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>وقاية النبات · توجه مبيدات الآفات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;500;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A130F; --bg2:#0F1C16; --card:#13241C; --line:#20372B;
+  --leaf:#8FD06A; --lime:#C6EA4B; --amber:#F2B33D; --red:#E8664A;
+  --text:#EDF1E6; --muted:#9DB0A2;
+  --display:'Alexandria',sans-serif; --body:'IBM Plex Sans Arabic',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.8;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin:0 auto;padding:0 28px 0 56px}
+
+/* ---------- HERO ---------- */
+.hero{min-height:100svh;position:relative;display:flex;flex-direction:column;justify-content:space-between;padding:28px 0 32px;overflow:hidden;
+  background:radial-gradient(120% 70% at 50% 62%,#16301F 0%,var(--bg) 62%)}
+.hero::before{content:"";position:absolute;inset:0;opacity:.07;pointer-events:none;
+  background-image:linear-gradient(var(--leaf) 1px,transparent 1px),linear-gradient(90deg,var(--leaf) 1px,transparent 1px);background-size:32px 32px;
+  mask-image:radial-gradient(60% 50% at 50% 60%,#000,transparent)}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--muted);padding:0 24px;position:relative;z-index:2}
+.top b{color:var(--text);font-weight:500}
+.chip{border:1px solid var(--line);border-radius:99px;padding:4px 12px;font-family:var(--display);font-size:11px;letter-spacing:.02em}
+.hero-txt{text-align:center;padding:0 24px;position:relative;z-index:2}
+.hello{font-family:var(--display);font-weight:300;font-size:15px;color:var(--leaf);opacity:0;animation:up .8s .2s forwards}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(34px,9vw,58px);line-height:1.25;margin:6px 0 4px;opacity:0;animation:up .9s .35s forwards}
+.hero h1 span{color:var(--lime)}
+.track{font-family:var(--display);font-weight:500;font-size:clamp(15px,4vw,19px);color:var(--muted);opacity:0;animation:up .9s .5s forwards}
+.scene{position:relative;width:min(92vw,420px);margin:0 auto;aspect-ratio:1/0.82;z-index:1}
+.scene svg{width:100%;height:100%;overflow:visible}
+.tag{text-align:center;font-family:var(--display);font-weight:500;font-size:clamp(17px,4.6vw,22px);padding:0 24px;position:relative;z-index:2;opacity:0;animation:up .9s 1.6s forwards}
+.tag em{font-style:normal;color:var(--lime)}
+.cue{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;color:var(--muted);margin-top:14px;opacity:0;animation:up .9s 2s forwards;text-decoration:none}
+.cue i{width:1px;height:34px;background:linear-gradient(var(--leaf),transparent);animation:drip 1.8s infinite}
+
+/* insect */
+.bug{animation:crawl 5.5s cubic-bezier(.45,.05,.3,1) .6s both}
+.leg{transform-box:fill-box;transform-origin:50% 0;animation:wig .28s ease-in-out infinite alternate}
+.leg.b{animation-delay:.14s}
+.reticle{transform-box:fill-box;transform-origin:center;animation:spin 14s linear infinite}
+.scan{animation:scan 2.4s ease-in-out infinite}
+.halo{transform-box:fill-box;transform-origin:center;animation:halo 2.8s ease-out 2.4s infinite;opacity:0}
+.sprout{transform-box:fill-box;transform-origin:50% 100%;animation:grow 1.4s cubic-bezier(.2,.9,.3,1.2) .3s both}
+.readout{opacity:0;animation:fade .6s 1.9s forwards}
+@keyframes crawl{0%{transform:translate(150px,10px)}60%{transform:translate(52px,0)}100%{transform:translate(70px,0)}}
+@keyframes wig{from{transform:rotate(-14deg)}to{transform:rotate(14deg)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes scan{0%,100%{transform:translateY(-34px);opacity:.0}20%,80%{opacity:.9}50%{transform:translateY(34px)}}
+@keyframes halo{0%{transform:scale(.6);opacity:.55}100%{transform:scale(1.7);opacity:0}}
+@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes fade{to{opacity:1}}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- GROWTH RAIL ---------- */
+.rail{position:fixed;left:20px;top:12vh;bottom:12vh;width:16px;z-index:20;opacity:0;transition:opacity .5s}
+.rail.show{opacity:1}
+.rail .bgl{position:absolute;left:7px;top:0;bottom:0;width:2px;background:var(--line);border-radius:2px}
+.rail .stem{position:absolute;left:6px;bottom:0;width:4px;height:0;border-radius:4px;background:linear-gradient(to top,var(--leaf),var(--lime))}
+.rail .node{position:absolute;left:0;width:16px;height:16px;transform:translateY(50%)}
+.rail .node::before,.rail .node::after{content:"";position:absolute;top:2px;width:12px;height:7px;background:var(--leaf);border-radius:0 100% 0 100%;transform:scale(0);transition:transform .45s cubic-bezier(.2,.9,.3,1.4)}
+.rail .node::before{left:8px;transform-origin:left center}
+.rail .node::after{right:8px;border-radius:100% 0 100% 0;transform-origin:right center}
+.rail .node.on::before,.rail .node.on::after{transform:scale(1)}
+.rail .bud{position:absolute;left:1px;top:-14px;width:14px;height:14px;border-radius:50%;background:var(--amber);transform:scale(0);transition:transform .5s cubic-bezier(.2,.9,.3,1.6);box-shadow:0 0 18px var(--amber)}
+.rail .bud.on{transform:scale(1)}
+
+/* ---------- SECTIONS ---------- */
+section.stage{padding:96px 0 40px;position:relative}
+.num{font-family:var(--display);font-weight:300;font-size:13px;color:var(--leaf);display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.num::after{content:"";height:1px;flex:0 0 40px;background:var(--leaf);opacity:.5}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(28px,7vw,40px);line-height:1.3;margin-bottom:14px}
+h2 small{display:block;font-size:14px;font-weight:300;color:var(--muted);margin-top:2px}
+.lead{font-size:clamp(17px,4.4vw,20px);font-weight:400;color:var(--text)}
+.lead.big{font-family:var(--display);font-weight:500;font-size:clamp(21px,5.6vw,28px);line-height:1.6}
+.lead.big mark{background:none;color:var(--lime)}
+.draft{display:inline-block;margin-top:14px;font-size:11px;color:var(--amber);border:1px dashed rgba(242,179,61,.5);border-radius:6px;padding:2px 10px}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* pillars (intro) */
+.pills{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
+.pill{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 10px;text-align:center;font-size:13px;color:var(--muted)}
+.pill svg{width:30px;height:30px;display:block;margin:0 auto 6px}
+.pill b{display:block;color:var(--text);font-family:var(--display);font-weight:500;font-size:14px}
+
+/* objectives */
+.objs{list-style:none;margin-top:18px;display:grid;gap:10px;counter-reset:o}
+.objs li{counter-increment:o;display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;transition-delay:var(--d,0s)}
+.objs li::before{content:counter(o,arabic-indic);font-family:var(--display);font-weight:700;font-size:22px;line-height:1.2;color:var(--lime);min-width:22px}
+
+/* safety */
+.safety{background:linear-gradient(180deg,transparent,#0D1A13 18%,#0D1A13 82%,transparent)}
+.warnbar{height:10px;border-radius:3px;margin-bottom:22px;opacity:.85;
+  background:repeating-linear-gradient(-45deg,var(--amber) 0 12px,#1a1a10 12px 24px)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.rule{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 14px;transition-delay:var(--d,0s)}
+.rule .ic{width:42px;height:42px;border-radius:12px;background:rgba(242,179,61,.1);display:grid;place-items:center;margin-bottom:10px}
+.rule .ic svg{width:24px;height:24px}
+.rule b{display:block;font-family:var(--display);font-weight:500;font-size:15px;line-height:1.5;margin-bottom:4px}
+.rule p{font-size:13px;color:var(--muted);line-height:1.7}
+
+/* journey */
+.journey{margin-top:26px;position:relative;display:grid;gap:0}
+.journey::before{content:"";position:absolute;right:21px;top:20px;bottom:20px;width:2px;background:linear-gradient(var(--amber),var(--leaf),var(--lime))}
+.step{display:flex;gap:16px;align-items:center;padding:10px 0;position:relative;transition-delay:var(--d,0s)}
+.dot{width:44px;height:44px;flex:0 0 44px;border-radius:50%;background:var(--bg2);border:2px solid var(--leaf);display:grid;place-items:center;font-size:20px;position:relative;z-index:1}
+.step b{font-family:var(--display);font-weight:500;font-size:16px;display:block}
+.step span{font-size:13px;color:var(--muted)}
+
+/* end */
+.end{text-align:center;padding:110px 0 60px}
+.end .seal{width:120px;height:120px;margin:0 auto 22px}
+.end h3{font-family:var(--display);font-weight:800;font-size:clamp(28px,8vw,44px);line-height:1.35}
+.end h3 span{color:var(--lime)}
+.end p{color:var(--muted);margin-top:10px;font-size:14px}
+footer{border-top:1px solid var(--line);padding:22px 24px 34px;text-align:center;font-size:12px;color:var(--muted)}
+
+@media (min-width:760px){.wrap{padding:0 28px}.grid{grid-template-columns:repeat(3,1fr)}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="top">
+    <div>جامعة المنوفية · <b>كلية الزراعة</b></div>
+    <div class="chip">قسم مبيدات الآفات</div>
+  </div>
+
+  <div class="hero-txt">
+    <div class="hello">مرحبًا بكم في</div>
+    <h1>برنامج <span>وقاية النبات</span></h1>
+    <div class="track">توجه مبيدات الآفات</div>
+  </div>
+
+  <div class="scene" aria-hidden="true">
+    <svg viewBox="0 0 400 330">
+      <!-- soil -->
+      <path d="M0 262 Q100 252 200 262 T400 260" stroke="#2C4A36" stroke-width="2" fill="none"/>
+      <path d="M30 278 h40 M120 284 h26 M250 280 h50 M330 288 h30" stroke="#1E3527" stroke-width="2" stroke-linecap="round"/>
+
+      <!-- protection halo -->
+      <circle class="halo" cx="140" cy="205" r="62" fill="none" stroke="#C6EA4B" stroke-width="2"/>
+
+      <!-- sprout -->
+      <g class="sprout">
+        <path d="M140 262 C140 230 138 205 142 172" stroke="#8FD06A" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M141 196 C116 192 98 172 100 150 C124 152 140 170 141 196Z" fill="#8FD06A"/>
+        <path d="M142 182 C164 172 184 150 182 126 C158 132 140 154 142 182Z" fill="#C6EA4B"/>
+        <path d="M141 196 C126 184 112 168 104 154" stroke="#0A130F" stroke-width="1.4" fill="none" opacity=".35"/>
+      </g>
+
+      <!-- insect + reticle -->
+      <g class="bug">
+        <g transform="translate(200,232)">
+          <!-- reticle -->
+          <g class="reticle">
+            <circle cx="0" cy="0" r="46" fill="none" stroke="#F2B33D" stroke-width="1.2" stroke-dasharray="4 7" opacity=".8"/>
+          </g>
+          <circle cx="0" cy="0" r="36" fill="none" stroke="#F2B33D" stroke-width="1" opacity=".35"/>
+          <path d="M-58 0 h12 M46 0 h12 M0 -58 v12 M0 46 v12" stroke="#F2B33D" stroke-width="1.5"/>
+          <clipPath id="c"><circle r="36"/></clipPath>
+          <rect class="scan" x="-36" y="-1" width="72" height="2" fill="#F2B33D" clip-path="url(#c)"/>
+          <!-- body -->
+          <g>
+            <line class="leg"   x1="-8" y1="2" x2="-16" y2="18" stroke="#E8DCC2" stroke-width="2.2" stroke-linecap="round"/>
+            <line class="leg b" x1="0"  y1="4" x2="-2"  y2="20" stroke="#E8DCC2" stroke-width="2.2" stroke-linecap="round"/>
+            <line class="leg"   x1="8"  y1="2" x2="14"  y2="18" stroke="#E8DCC2" stroke-width="2.2" stroke-linecap="round"/>
+            <ellipse cx="2" cy="-4" rx="20" ry="13" fill="#E8664A"/>
+            <path d="M2 -17 V9" stroke="#0A130F" stroke-width="1.6" opacity=".55"/>
+            <circle cx="-6" cy="-8" r="3" fill="#0A130F" opacity=".55"/>
+            <circle cx="10" cy="-1" r="3" fill="#0A130F" opacity=".55"/>
+            <circle cx="9" cy="-10" r="2.2" fill="#0A130F" opacity=".55"/>
+            <circle cx="-20" cy="-4" r="7.5" fill="#3A1F18"/>
+            <path d="M-25 -9 Q-34 -22 -40 -20 M-23 -10 Q-27 -24 -32 -26" stroke="#E8DCC2" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+          </g>
+          <!-- readout -->
+          <g class="readout" font-family="Alexandria" font-size="10" fill="#F2B33D">
+            <text x="30" y="-58" text-anchor="end">● رصد آفة</text>
+            <text x="30" y="-46" text-anchor="end" fill="#9DB0A2">مستوى التهديد: مرتفع</text>
+          </g>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <div>
+    <p class="tag">نحمي <em>النبات</em>… لنحمي <em>الإنسان</em></p>
+    <a href="#s1" class="cue">ابدأ الرحلة<i></i></a>
+  </div>
+</header>
+
+<!-- growth rail -->
+<div class="rail" id="rail" aria-hidden="true">
+  <div class="bgl"></div>
+  <div class="stem" id="stem"></div>
+  <div class="bud" id="bud"></div>
+</div>
+
+<main class="wrap">
+
+  <!-- 01 -->
+  <section class="stage" id="s1" data-stage>
+    <div class="num reveal">٠١ · البذرة</div>
+    <h2 class="reveal">مين إحنا؟<small>عن البرنامج</small></h2>
+    <p class="lead reveal">برنامج يجمع بين علوم الحشرات وأمراض النبات وكيمياء المبيدات، لإعداد متخصصين قادرين على حماية المحاصيل بطرق علمية <b>آمنة ومستدامة</b>.</p>
+    <div class="pills reveal">
+      <div class="pill">
+        <svg viewBox="0 0 32 32" fill="none" stroke="#8FD06A" stroke-width="1.8" stroke-linecap="round"><ellipse cx="16" cy="18" rx="6" ry="8"/><circle cx="16" cy="8" r="3"/><path d="M10 14 4 11M10 19H4M10 24l-5 3M22 14l6-3M22 19h6M22 24l5 3"/></svg>
+        <b>الآفات</b>رصد وتعريف
+      </div>
+      <div class="pill">
+        <svg viewBox="0 0 32 32" fill="none" stroke="#C6EA4B" stroke-width="1.8" stroke-linecap="round"><path d="M12 4h8M14 4v8L7 25a2 2 0 0 0 2 3h14a2 2 0 0 0 2-3l-7-13V4"/><path d="M10 20h12"/></svg>
+        <b>المبيدات</b>كيمياء وسمّية
+      </div>
+      <div class="pill">
+        <svg viewBox="0 0 32 32" fill="none" stroke="#F2B33D" stroke-width="1.8" stroke-linecap="round"><path d="M16 4 6 8v7c0 6 4 11 10 13 6-2 10-7 10-13V8z"/><path d="m11 16 4 4 6-7"/></svg>
+        <b>السلامة</b>إنسان وبيئة
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="stage" id="s2" data-stage>
+    <div class="num reveal">٠٢ · البرعم</div>
+    <h2 class="reveal">الرؤية</h2>
+    <p class="lead big reveal">الريادة في علوم وقاية النبات و<mark>الاستخدام الآمن للمبيدات</mark>، دعمًا لأمن غذائي مستدام.</p>
+    <span class="draft reveal">نص مقترح · يُستبدل بالنص المعتمد</span>
+  </section>
+
+  <!-- 03 -->
+  <section class="stage" id="s3" data-stage>
+    <div class="num reveal">٠٣ · الأوراق</div>
+    <h2 class="reveal">الرسالة</h2>
+    <p class="lead reveal">إعداد خريجين متميزين علميًا ومهنيًا في مجال مبيدات الآفات، وإجراء بحوث تطبيقية تخدم المزارع والمجتمع، ونشر ثقافة المكافحة الآمنة والمتكاملة حفاظًا على صحة الإنسان والبيئة.</p>
+    <span class="draft reveal">نص مقترح · يُستبدل بالنص المعتمد</span>
+  </section>
+
+  <!-- 04 -->
+  <section class="stage" id="s4" data-stage>
+    <div class="num reveal">٠٤ · الفروع</div>
+    <h2 class="reveal">أهداف البرنامج</h2>
+    <ol class="objs">
+      <li class="reveal" style="--d:0s">إكساب الطالب أسس كيمياء المبيدات وسمّيتها وطرق تقييمها.</li>
+      <li class="reveal" style="--d:.08s">تطبيق مفاهيم المكافحة المتكاملة للآفات (IPM) وترشيد استخدام المبيدات.</li>
+      <li class="reveal" style="--d:.16s">التدريب على تقدير متبقيات المبيدات لضمان سلامة الغذاء.</li>
+      <li class="reveal" style="--d:.24s">تنمية مهارات البحث العلمي والعمل المعملي والميداني.</li>
+      <li class="reveal" style="--d:.32s">خدمة المجتمع وتقديم الإرشاد الزراعي للمزارعين.</li>
+    </ol>
+    <span class="draft reveal">نص مقترح · يُستبدل بالنص المعتمد</span>
+  </section>
+
+</main>
+
+<!-- 05 SAFETY -->
+<section class="stage safety" id="s5" data-stage>
+  <div class="wrap">
+    <div class="warnbar reveal"></div>
+    <div class="num reveal" style="color:var(--amber)">٠٥ · درع الحماية</div>
+    <h2 class="reveal">مبادئ السلامة العامة<small>في الحقل والمعمل</small></h2>
+    <div class="grid">
+      <div class="rule reveal" style="--d:0s">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#F2B33D" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div>
+        <b>اقرأ الملصق أولًا</b><p>البطاقة الاستدلالية هي المرجع قبل أي استخدام.</p>
+      </div>
+      <div class="rule reveal" style="--d:.06s">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#F2B33D" stroke-width="1.8" stroke-linecap="round"><path d="M4 10c0-3 3-5 8-5s8 2 8 5v3c0 3-4 6-8 6s-8-3-8-6z"/><path d="M8 12h8"/></svg></div>
+        <b>مهمات الوقاية</b><p>قفازات، كمامة، نظارة، وملابس واقية.</p>
+      </div>
+      <div class="rule reveal" style="--d:.12s">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#F2B33D" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="m6 6 12 12"/></svg></div>
+        <b>لا أكل ولا تدخين</b><p>ممنوع الأكل أو الشرب أو التدخين أثناء التعامل.</p>
+      </div>
+      <div class="rule reveal" style="--d:.18s">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#F2B33D" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M8 9V6a4 4 0 0 1 8 0v3"/></svg></div>
+        <b>تخزين آمن</b><p>في العبوة الأصلية، بعيدًا عن الأطفال والأغذية.</p>
+      </div>
+      <div class="rule reveal" style="--d:.24s">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#F2B33D" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg></div>
+        <b>فترة الأمان</b><p>الالتزام بالمدة المحددة بين الرش والحصاد.</p>
+      </div>
+      <div class="rule reveal" style="--d:.30s">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#F2B33D" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg></div>
+        <b>تخلّص سليم</b><p>العبوات الفارغة لا يُعاد استخدامها أبدًا.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+  <!-- 06 JOURNEY -->
+  <section class="stage" id="s6" data-stage>
+    <div class="num reveal">٠٦ · الحصاد</div>
+    <h2 class="reveal">من الحقل إلى الطبق<small>دورنا في كل خطوة</small></h2>
+    <div class="journey">
+      <div class="step reveal" style="--d:0s"><div class="dot" style="border-color:var(--red)">🐛</div><div><b>رصد الآفة</b><span>تعريف الآفة وتقدير خطورتها</span></div></div>
+      <div class="step reveal" style="--d:.08s"><div class="dot" style="border-color:var(--amber)">🧪</div><div><b>اختيار الحل</b><span>مكافحة متكاملة واختيار علمي للمبيد</span></div></div>
+      <div class="step reveal" style="--d:.16s"><div class="dot">🛡️</div><div><b>تطبيق آمن</b><span>جرعة صحيحة ووقاية كاملة</span></div></div>
+      <div class="step reveal" style="--d:.24s"><div class="dot">🔬</div><div><b>تحليل المتبقيات</b><span>التأكد من الحدود الآمنة</span></div></div>
+      <div class="step reveal" style="--d:.32s"><div class="dot" style="border-color:var(--lime)">🍽️</div><div><b>طبق آمن</b><span>غذاء صحي يصل للإنسان</span></div></div>
+    </div>
+  </section>
+
+  <div class="end reveal" id="end">
+    <svg class="seal" viewBox="0 0 120 120" aria-hidden="true">
+      <circle cx="60" cy="60" r="56" fill="none" stroke="#20372B" stroke-width="2"/>
+      <circle cx="60" cy="60" r="44" fill="#13241C"/>
+      <path d="M60 92 C60 76 59 66 61 50" stroke="#8FD06A" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M60 72 C46 70 38 60 39 48 C52 49 60 58 60 72Z" fill="#8FD06A"/>
+      <path d="M61 62 C73 56 83 44 82 32 C69 35 60 47 61 62Z" fill="#C6EA4B"/>
+      <circle cx="61" cy="46" r="5" fill="#F2B33D"/>
+    </svg>
+    <h3>علم يحمي…<br><span>وحصاد آمن</span></h3>
+    <p>برنامج وقاية النبات · توجه مبيدات الآفات</p>
+  </div>
+</main>
+
+<footer>قسم مبيدات الآفات · كلية الزراعة · جامعة المنوفية</footer>
+
+<script>
+(function(){
+  // reveal on scroll
+  const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.18,rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // growth rail
+  const rail=document.getElementById('rail'), stem=document.getElementById('stem'), bud=document.getElementById('bud');
+  const hero=document.getElementById('top'), stages=[...document.querySelectorAll('[data-stage]')];
+  const nodes=stages.map((s,i)=>{const n=document.createElement('div');n.className='node';n.style.bottom=((i+1)/(stages.length+.6)*100)+'%';rail.appendChild(n);return n;});
+  let ticking=false;
+  function update(){
+    ticking=false;
+    const y=window.scrollY, vh=window.innerHeight;
+    const start=hero.offsetHeight*.55, end=document.documentElement.scrollHeight-vh;
+    const p=Math.min(1,Math.max(0,(y-start)/(end-start)));
+    rail.classList.toggle('show', y>hero.offsetHeight*.5);
+    stem.style.height=(p*100)+'%';
+    nodes.forEach((n,i)=>n.classList.toggle('on', p >= (i+1)/(stages.length+.6) - .02));
+    bud.classList.toggle('on', p>.97);
+  }
+  addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});
+  addEventListener('resize',update); update();
+})();
+</script>
+</body>
+</html>
