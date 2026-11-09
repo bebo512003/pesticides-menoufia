@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>وقاية النبات · توجه مبيدات الآفات</title>
+<meta name="description" content="برنامج وقاية النبات (توجه مبيدات الآفات) · قسم مبيدات الآفات · كلية الزراعة · جامعة المنوفية">
+<meta property="og:title" content="برنامج وقاية النبات · توجه مبيدات الآفات">
+<meta property="og:description" content="نحمي النبات… لنحمي الإنسان · كلية الزراعة · جامعة المنوفية">
+<meta property="og:image" content="https://bebo512003.github.io/pesticides-menoufia/logo.png">
+<meta name="theme-color" content="#0A130F">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;500;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A130F; --bg2:#0F1C16; --card:#13241C; --card2:#183026; --line:#22392D;
+  --leaf:#8FD06A; --lime:#C6EA4B; --amber:#F2B33D; --red:#E8664A; --sky:#7CC6E8;
+  --text:#EDF1E6; --muted:#9DB0A2;
+  --display:'Alexandria',sans-serif; --body:'IBM Plex Sans Arabic',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.8;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.wrap{max-width:720px;margin:0 auto;padding:0 24px 0 54px;position:relative;z-index:1}
+section,header,footer,.end{position:relative;z-index:1}
+
+/* ================= HERO ================= */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;padding:22px 0 26px;overflow:hidden;
+  background:radial-gradient(120% 70% at 50% 64%,#16301F 0%,rgba(10,19,15,0) 62%)}
+.hero::before{content:"";position:absolute;inset:0;opacity:.08;pointer-events:none;
+  background-image:linear-gradient(var(--leaf) 1px,transparent 1px),linear-gradient(90deg,var(--leaf) 1px,transparent 1px);background-size:32px 32px;
+  mask-image:radial-gradient(60% 50% at 50% 62%,#000,transparent);-webkit-mask-image:radial-gradient(60% 50% at 50% 62%,#000,transparent)}
+.hero::after{content:"";position:absolute;left:0;right:0;height:120px;top:-120px;pointer-events:none;
+  background:linear-gradient(to bottom,transparent,rgba(198,234,75,.07),transparent);animation:sweep 2.2s .1s ease-in-out both}
+@keyframes sweep{to{top:110%}}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);padding:0 18px;position:relative;z-index:2;opacity:0;animation:up .8s .1s forwards}
+.brand{display:flex;align-items:center;gap:10px;line-height:1.45}
+.brand b{color:var(--text);font-weight:500}
+.brand img,.brand svg{width:46px;height:46px;border-radius:50%;background:#fff;box-shadow:0 0 0 1px var(--line),0 6px 18px rgba(0,0,0,.35);flex:0 0 46px}
+.brand img{padding:2px}
+.hero-txt{text-align:center;padding:0 22px;position:relative;z-index:2}
+.hello{font-family:var(--display);font-weight:300;font-size:15px;color:var(--leaf);opacity:0;animation:up .8s .3s forwards}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(34px,9.4vw,60px);line-height:1.25;margin:6px 0 4px}
+.hero h1 .w{display:inline-block;opacity:0;transform:translateY(24px) scale(.96);filter:blur(8px);animation:wordIn .9s cubic-bezier(.2,.8,.2,1) forwards}
+.hero h1 .w.hl{color:var(--lime)}
+.track{font-family:var(--display);font-weight:500;font-size:clamp(15px,4vw,19px);color:var(--muted);opacity:0;animation:up .9s .9s forwards}
+.scene{position:relative;width:min(94vw,440px);margin:0 auto;aspect-ratio:400/330;z-index:1}
+.scene svg{width:100%;height:100%;overflow:visible}
+.tag{text-align:center;font-family:var(--display);font-weight:500;font-size:clamp(18px,4.8vw,23px);padding:0 22px;position:relative;z-index:2;opacity:0;animation:up .9s 4.3s forwards}
+.tag em{font-style:normal;color:var(--lime)}
+.cue{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;color:var(--muted);margin-top:12px;opacity:0;animation:up .9s 4.8s forwards;text-decoration:none}
+.cue i{width:1px;height:34px;background:linear-gradient(var(--leaf),transparent);animation:drip 1.8s infinite}
+
+/* hero scene choreography */
+.sprout{transform-box:fill-box;transform-origin:50% 100%;animation:grow 1.3s cubic-bezier(.2,.9,.3,1.2) .4s both}
+.sway{transform-box:fill-box;transform-origin:50% 100%;animation:sway 4s ease-in-out 2s infinite}
+.bug{animation:approach 5.6s cubic-bezier(.45,.05,.3,1) .7s both}
+.leg{transform-box:fill-box;transform-origin:50% 0;animation:wig .26s ease-in-out infinite alternate}
+.leg.b{animation-delay:.13s}
+.ret{transform-box:fill-box;transform-origin:center;animation:spin 10s linear infinite}
+.lock{transform-box:fill-box;transform-origin:center;animation:lock .5s 2.1s cubic-bezier(.2,.9,.3,1.4) both}
+.scan{animation:scan 1.6s ease-in-out infinite}
+.read1{opacity:0;animation:blink 1.9s 1.9s both}
+.read2{opacity:0;animation:fadeIn .6s 4s forwards}
+.shield{stroke-dasharray:250;stroke-dashoffset:250;animation:draw 1s 3.1s cubic-bezier(.6,0,.2,1) forwards}
+.dome{opacity:0;animation:fadeIn 1s 3.6s forwards}
+.halo{transform-box:fill-box;transform-origin:center;opacity:0;animation:halo 2.8s ease-out 4.2s infinite}
+@keyframes approach{0%{transform:translate(175px,6px)}42%{transform:translate(64px,0)}60%{transform:translate(64px,0);opacity:1}100%{transform:translate(240px,-4px);opacity:0}}
+@keyframes lock{from{transform:scale(1.6);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes blink{0%{opacity:0}10%,80%{opacity:1}90%{opacity:.2}100%{opacity:0}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes wig{from{transform:rotate(-14deg)}to{transform:rotate(14deg)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes scan{0%,100%{transform:translateY(-30px);opacity:0}25%,75%{opacity:.9}50%{transform:translateY(30px)}}
+@keyframes halo{0%{transform:scale(.7);opacity:.5}100%{transform:scale(1.5);opacity:0}}
+@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes sway{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(2.5deg)}}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes wordIn{to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes fadeIn{to{opacity:1}}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ================= GROWTH RAIL ================= */
+.rail{position:fixed;left:18px;top:12vh;bottom:12vh;width:16px;z-index:20;opacity:0;transition:opacity .5s}
+.rail.show{opacity:1}
+.rail .bgl{position:absolute;left:7px;top:0;bottom:0;width:2px;background:var(--line);border-radius:2px}
+.rail .stem{position:absolute;left:6px;bottom:0;width:4px;height:0;border-radius:4px;background:linear-gradient(to top,var(--leaf),var(--lime));box-shadow:0 0 10px rgba(198,234,75,.35)}
+.rail .node{position:absolute;left:0;width:16px;height:16px;transform:translateY(50%)}
+.rail .node::before,.rail .node::after{content:"";position:absolute;top:2px;width:12px;height:7px;background:var(--leaf);border-radius:0 100% 0 100%;transform:scale(0);transition:transform .45s cubic-bezier(.2,.9,.3,1.4)}
+.rail .node::before{left:8px;transform-origin:left center}
+.rail .node::after{right:8px;border-radius:100% 0 100% 0;transform-origin:right center}
+.rail .node.on::before,.rail .node.on::after{transform:scale(1)}
+.rail .bud{position:absolute;left:1px;top:-14px;width:14px;height:14px;border-radius:50%;background:var(--amber);transform:scale(0);transition:transform .5s cubic-bezier(.2,.9,.3,1.6);box-shadow:0 0 18px var(--amber)}
+.rail .bud.on{transform:scale(1)}
+
+/* ================= SECTIONS ================= */
+section.stage{padding:92px 0 36px}
+.num{font-family:var(--display);font-weight:300;font-size:13px;color:var(--leaf);display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.num::after{content:"";height:1px;flex:0 0 40px;background:currentColor;opacity:.5;transform-origin:right;transform:scaleX(0);transition:transform .9s .2s}
+.num.in::after{transform:scaleX(1)}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(28px,7vw,40px);line-height:1.3;margin-bottom:14px}
+h2 small{display:block;font-size:14px;font-weight:300;color:var(--muted);margin-top:2px}
+h2 .w{display:inline-block;opacity:0;transform:translateY(18px);filter:blur(6px);transition:all .7s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i)*70ms)}
+h2.in .w{opacity:1;transform:none;filter:none}
+.lead{font-size:clamp(16.5px,4.3vw,19px)}
+.lead.big{font-family:var(--display);font-weight:500;font-size:clamp(21px,5.6vw,28px);line-height:1.65}
+.lead.big mark{background:linear-gradient(transparent 62%,rgba(198,234,75,.28) 62%) no-repeat;background-size:0% 100%;color:var(--lime);transition:background-size 1.1s .5s cubic-bezier(.6,0,.2,1)}
+.lead.big.in mark{background-size:100% 100%}
+.muted{color:var(--muted)}
+.src{margin-top:14px;font-size:11.5px;color:var(--muted);opacity:.75}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.reveal.in{opacity:1;transform:none}
+
+/* counters */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;position:relative;overflow:hidden}
+.stat::after{content:"";position:absolute;inset:auto 0 0 0;height:2px;background:linear-gradient(90deg,transparent,var(--lime),transparent);transform:translateX(100%);transition:transform 1.4s .3s}
+.stat.in::after{transform:translateX(-100%)}
+.stat b{display:block;font-family:var(--display);font-weight:800;font-size:30px;line-height:1.2;color:var(--lime)}
+.stat span{font-size:13px;color:var(--muted)}
+
+/* objectives */
+.objs{list-style:none;margin-top:18px;display:grid;gap:10px;counter-reset:o}
+.objs li{counter-increment:o;display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;font-size:14.5px;color:var(--muted);line-height:1.75}
+.objs li::before{content:counter(o,arabic-indic);font-family:var(--display);font-weight:700;font-size:22px;line-height:1.2;color:var(--lime);min-width:22px;transform:scale(0) rotate(-40deg);transition:transform .6s calc(var(--d,0s) + .25s) cubic-bezier(.2,.9,.3,1.6)}
+.objs li.in::before{transform:none}
+.objs .ot{display:block;font-family:var(--display);font-weight:500;font-size:16px;color:var(--text);margin-bottom:2px}
+
+/* ================= IPM LAB ================= */
+.lab{margin-top:20px;background:linear-gradient(180deg,#112219,#0D1A13);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.lab-stage{position:relative;aspect-ratio:360/200;background:radial-gradient(90% 90% at 30% 100%,#17331F,transparent 70%)}
+.lab-stage svg{width:100%;height:100%;display:block}
+.lab-status{position:absolute;top:10px;right:12px;font-family:var(--display);font-size:11.5px;padding:4px 10px;border-radius:99px;background:rgba(232,102,74,.15);color:var(--red);border:1px solid rgba(232,102,74,.35);transition:all .4s}
+.lab-status.ok{background:rgba(143,208,106,.15);color:var(--leaf);border-color:rgba(143,208,106,.4)}
+.lab-warn{position:absolute;top:10px;left:12px;font-family:var(--display);font-size:11px;padding:4px 10px;border-radius:8px;background:var(--amber);color:#1b1405;opacity:0;transform:translateY(-6px);transition:all .4s;pointer-events:none}
+.lab-warn.show{opacity:1;transform:none;animation:pulse 1s 3}
+@keyframes pulse{50%{transform:scale(1.06)}}
+.methods{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:12px}
+.mbtn{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;border-radius:14px;background:var(--card);border:1px solid var(--line);font-family:var(--display);font-size:12px;font-weight:500;transition:transform .2s,background .3s,border-color .3s}
+.mbtn i{font-style:normal;font-size:22px;line-height:1}
+.mbtn:active{transform:scale(.94)}
+.mbtn.on{background:var(--card2);border-color:var(--lime)}
+.mbtn[disabled]{opacity:.45}
+.mbtn.chem{border-color:rgba(242,179,61,.35)}
+.lab-card{margin:0 12px 12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;min-height:120px}
+.lab-card .hint{color:var(--muted);font-size:14px;text-align:center;padding:18px 0}
+.lab-card h3{font-family:var(--display);font-weight:700;font-size:19px;margin-bottom:4px}
+.lab-card p{font-size:14px;color:var(--muted)}
+.lab-card ul{list-style:none;margin-top:10px;display:grid;gap:6px;font-size:13.5px}
+.lab-card li{display:flex;gap:8px}
+.lab-card li b{font-family:var(--display);font-weight:500;color:var(--text);flex:0 0 auto}
+.lab-card .anim{animation:cardIn .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes cardIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.ladder{display:flex;align-items:stretch;gap:4px;margin:14px 12px 14px}
+.rung{flex:1;text-align:center;font-size:11px;line-height:1.4;padding:8px 4px;border-radius:10px;background:var(--card);border:1px solid var(--line);color:var(--muted);font-family:var(--display)}
+.rung b{display:block;font-size:12.5px;color:var(--text);font-weight:500}
+.rung.c{border-color:rgba(242,179,61,.4)}
+.rung.c b{color:var(--amber)}
+.ladder-t{font-family:var(--display);font-size:12px;color:var(--muted);margin:0 12px}
+/* lab svg anims */
+#pest{transition:opacity .5s}
+.lab-bug-leg{transform-box:fill-box;transform-origin:50% 0;animation:wig .22s ease-in-out infinite alternate}
+.lab-bug-leg.b{animation-delay:.11s}
+.paused .lab-bug-leg{animation-play-state:paused}
+.plant-g{transform-box:fill-box;transform-origin:50% 100%;transition:filter .6s}
+.plant-g.stress{filter:saturate(.35) brightness(.85)}
+.plant-g.happy{animation:happy .8s cubic-bezier(.2,.9,.3,1.5)}
+@keyframes happy{40%{transform:scale(1.08,1.12)}}
+
+/* courses */
+.lvl{display:flex;align-items:center;gap:10px;margin:22px 0 10px;font-family:var(--display);font-size:13px;color:var(--muted)}
+.lvl::after{content:"";flex:1;height:1px;background:var(--line)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.crs{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:8px 8px 8px 16px;font-family:var(--display);font-weight:500;font-size:14.5px;transform:translateY(16px) scale(.9);opacity:0;transition:all .55s cubic-bezier(.2,.9,.3,1.4);transition-delay:var(--d,0s)}
+.crs.in{transform:none;opacity:1}
+.crs i{font-style:normal;font-size:11.5px;font-weight:500;color:var(--bg);background:var(--leaf);border-radius:99px;padding:3px 10px}
+
+/* safety */
+.safety{background:linear-gradient(180deg,transparent,#0D1A13 14%,#0D1A13 86%,transparent)}
+.warnbar{height:10px;border-radius:3px;margin-bottom:22px;opacity:.85;
+  background:repeating-linear-gradient(-45deg,var(--amber) 0 12px,#1a1a10 12px 24px);background-size:34px 34px;animation:stripes 1.2s linear infinite}
+@keyframes stripes{to{background-position:34px 0}}
+.grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:20px}
+.rule{display:grid;grid-template-columns:42px 1fr;column-gap:14px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}
+.rule .ic{grid-row:span 2;width:42px;height:42px;border-radius:12px;background:rgba(242,179,61,.1);display:grid;place-items:center;transform:scale(.4) rotate(-20deg);opacity:0;transition:all .6s calc(var(--d,0s) + .2s) cubic-bezier(.2,.9,.3,1.6)}
+.rule.in .ic{transform:none;opacity:1}
+.rule .ic svg{width:24px;height:24px}
+.rule b{display:block;font-family:var(--display);font-weight:500;font-size:15px;line-height:1.5;margin-bottom:2px}
+.rule p{font-size:13px;color:var(--muted);line-height:1.7}
+
+/* journey */
+.journey{margin-top:26px;position:relative;padding-right:0}
+.jline{position:absolute;right:21px;top:22px;bottom:22px;width:2px;background:var(--line)}
+.jfill{position:absolute;right:21px;top:22px;width:2px;height:0;background:linear-gradient(var(--red),var(--amber),var(--leaf),var(--lime));box-shadow:0 0 10px rgba(198,234,75,.4)}
+.step{display:flex;gap:16px;align-items:center;padding:10px 0;position:relative}
+.dot{width:44px;height:44px;flex:0 0 44px;border-radius:50%;background:var(--bg2);border:2px solid var(--line);display:grid;place-items:center;font-size:20px;position:relative;z-index:1;transition:border-color .4s,box-shadow .4s,transform .4s;filter:grayscale(1);opacity:.6}
+.step.lit .dot{border-color:var(--c,var(--leaf));box-shadow:0 0 0 5px rgba(143,208,106,.08);transform:scale(1.06);filter:none;opacity:1}
+.step b{font-family:var(--display);font-weight:500;font-size:16px;display:block}
+.step span{font-size:13px;color:var(--muted)}
+
+/* ================= GAME ================= */
+.game{margin-top:20px;background:linear-gradient(180deg,#132a1d,#0E1C15);border:1px solid var(--line);border-radius:22px;overflow:hidden;position:relative}
+.gscreen{display:none;padding:16px}
+.gscreen.on{display:block;animation:cardIn .45s cubic-bezier(.2,.8,.2,1)}
+.levels{display:grid;gap:10px;margin-top:12px}
+.lvbtn{display:flex;align-items:center;gap:14px;text-align:right;width:100%;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;transition:transform .15s,border-color .3s}
+.lvbtn:active{transform:scale(.98)}
+.lvbtn .badge{width:48px;height:48px;flex:0 0 48px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:rgba(143,208,106,.12)}
+.lvbtn b{font-family:var(--display);font-weight:700;font-size:16px;display:block}
+.lvbtn span{font-size:12.5px;color:var(--muted);display:block;line-height:1.6}
+.lvbtn .stars{margin-right:auto;font-size:14px;letter-spacing:1px;color:#3b5246;white-space:nowrap;display:flex;gap:1px}
+.lvbtn .stars span{display:inline}
+.lvbtn .stars .s{color:var(--amber)}
+.ghint{font-size:13px;color:var(--muted)}
+.hud{display:flex;align-items:center;gap:10px;font-family:var(--display);font-size:12px;color:var(--muted)}
+.hud .lv{color:var(--leaf);font-weight:500}
+.hud .qn{margin-right:auto}
+.bar{height:8px;border-radius:99px;background:#1c2e24;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;width:100%;border-radius:99px;background:linear-gradient(90deg,var(--leaf),var(--lime));transition:width .6s cubic-bezier(.2,.8,.2,1),background .4s}
+.bar.low i{background:linear-gradient(90deg,var(--red),var(--amber))}
+.barlbl{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px}
+.field{position:relative;margin:12px -16px 0;aspect-ratio:360/150;overflow:hidden}
+.field svg{width:100%;height:100%;display:block}
+.field .sun{transition:transform 1s, opacity 1s}
+.field.hot .sun{transform:scale(1.5);}
+.field .gust{opacity:0}
+.field.windy .gust{opacity:.7;animation:gust 1.4s linear infinite}
+.field.windy .crop{animation:bend 1.4s ease-in-out infinite}
+.field.night .skyrect{fill:#0b1a2a}
+@keyframes gust{from{transform:translateX(60px)}to{transform:translateX(-360px)}}
+@keyframes bend{50%{transform:skewX(8deg)}}
+.crop{transform-box:fill-box;transform-origin:50% 100%;transition:filter .5s}
+.crop.sick{filter:saturate(.2) sepia(.6) brightness(.8)}
+.crop.boost{animation:boost .8s cubic-bezier(.2,.9,.3,1.6)}
+@keyframes boost{40%{transform:scale(1.25)}}
+.fbug{transform-box:fill-box;transform-origin:center;animation:pop .4s cubic-bezier(.2,.9,.3,1.6) both}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+.scn{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-family:var(--display);font-size:12px;padding:4px 12px;border-radius:99px;background:rgba(124,198,232,.12);color:var(--sky);border:1px solid rgba(124,198,232,.3)}
+.q{font-family:var(--display);font-weight:500;font-size:17px;line-height:1.65;margin:10px 0 12px}
+.opts{display:grid;gap:8px}
+.opt{text-align:right;width:100%;padding:12px 14px;border-radius:14px;background:var(--card);border:1px solid var(--line);font-size:14.5px;line-height:1.6;transition:transform .15s,background .3s,border-color .3s,opacity .3s;animation:optIn .4s both;animation-delay:calc(var(--i)*60ms)}
+@keyframes optIn{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+.opt:active{transform:scale(.98)}
+.opt.right{background:rgba(143,208,106,.16);border-color:var(--leaf)}
+.opt.wrong{background:rgba(232,102,74,.14);border-color:var(--red);animation:shake .4s}
+.opt.dim{opacity:.45}
+@keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.fb{margin-top:12px;border-radius:14px;padding:14px;font-size:14px;line-height:1.75;display:none}
+.fb.on{display:block;animation:cardIn .4s}
+.fb.ok{background:rgba(143,208,106,.1);border:1px solid rgba(143,208,106,.35)}
+.fb.no{background:rgba(232,102,74,.08);border:1px solid rgba(232,102,74,.3)}
+.fb b{font-family:var(--display);display:block;margin-bottom:2px}
+.gbtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:14px;background:var(--lime);color:#12200f;font-family:var(--display);font-weight:700;font-size:14.5px;margin-top:12px;width:100%;transition:transform .15s}
+.gbtn:active{transform:scale(.97)}
+.gbtn.ghost{background:var(--card);color:var(--text);border:1px solid var(--line)}
+.result{text-align:center;padding:10px 0}
+.result .big{font-size:44px;letter-spacing:6px;margin:6px 0}
+.result .big .s{display:inline-block;color:var(--amber);animation:starIn .6s cubic-bezier(.2,.9,.3,1.6) both}
+.result .big .e{color:#2f4337}
+@keyframes starIn{from{transform:scale(0) rotate(-90deg)}to{transform:none}}
+.result h3{font-family:var(--display);font-weight:800;font-size:24px}
+.result p{color:var(--muted);font-size:14px}
+.gbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.confetti{position:absolute;pointer-events:none;width:8px;height:12px;border-radius:2px 8px;top:0}
+
+/* end */
+.end{text-align:center;padding:100px 0 50px}
+.seals{display:flex;justify-content:center;gap:22px;margin-bottom:26px}
+.seal{display:block;width:112px;height:112px;border-radius:50%;background:#fff;box-shadow:0 0 0 6px rgba(143,208,106,.12),0 0 0 7px var(--line),0 18px 50px rgba(0,0,0,.5)}
+img.seal{padding:4px}
+.end.in .seal{animation:sealIn .9s cubic-bezier(.2,.9,.3,1.3) both}
+.end.in .seal+.seal{animation-delay:.15s}
+@keyframes sealIn{from{transform:scale(.6) rotate(-25deg);opacity:0}to{transform:none;opacity:1}}
+.end h3{font-family:var(--display);font-weight:800;font-size:clamp(28px,8vw,44px);line-height:1.35}
+.end h3 span{color:var(--lime)}
+.end p{color:var(--muted);margin-top:10px;font-size:14px}
+footer{border-top:1px solid var(--line);padding:22px 24px 34px;text-align:center;font-size:12px;color:var(--muted)}
+
+/* tap burst */
+.burst{position:fixed;width:10px;height:6px;background:var(--leaf);border-radius:0 100% 0 100%;pointer-events:none;z-index:50}
+
+@media (min-width:600px){.grid{grid-template-columns:1fr 1fr}.stats{grid-template-columns:repeat(4,1fr)}}
+@media (min-width:760px){.wrap{padding:0 28px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal,.crs,h2 .w{opacity:1;transform:none;filter:none}}
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="deptLogo" viewBox="0 0 400 400">%%DEPTLOGO%%</symbol>
+</svg>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <div class="top">
+    <div class="brand"><img src="logo.png" alt="شعار كلية الزراعة - جامعة المنوفية" width="46" height="46"><span>جامعة المنوفية<br><b>كلية الزراعة</b></span></div>
+    <div class="brand"><span style="text-align:left">قسم<br><b>مبيدات الآفات</b></span><svg role="img" aria-label="شعار قسم مبيدات الآفات"><use href="#deptLogo"/></svg></div>
+  </div>
+
+  <div class="hero-txt">
+    <div class="hello">مرحبًا بكم في</div>
+    <h1><span class="w" style="animation-delay:.45s">برنامج</span> <span class="w hl" style="animation-delay:.6s">وقاية</span> <span class="w hl" style="animation-delay:.72s">النبات</span></h1>
+    <div class="track">توجه مبيدات الآفات</div>
+  </div>
+
+  <div class="scene" aria-hidden="true">
+    <svg viewBox="0 0 400 330">
+      <defs>
+        <radialGradient id="domeG" cx="50%" cy="100%" r="80%"><stop offset="0" stop-color="#C6EA4B" stop-opacity=".18"/><stop offset="1" stop-color="#C6EA4B" stop-opacity="0"/></radialGradient>
+        <clipPath id="rc"><circle r="34"/></clipPath>
+      </defs>
+      <path d="M0 262 Q100 252 200 262 T400 260" stroke="#2C4A36" stroke-width="2" fill="none"/>
+      <path d="M30 278 h40 M120 284 h26 M250 280 h50 M330 288 h30" stroke="#1E3527" stroke-width="2" stroke-linecap="round"/>
+
+      <path class="dome" d="M62 262 A78 78 0 0 1 218 262 Z" fill="url(#domeG)"/>
+      <circle class="halo" cx="140" cy="222" r="60" fill="none" stroke="#C6EA4B" stroke-width="1.5"/>
+
+      <g class="sprout"><g class="sway">
+        <path d="M140 262 C140 230 138 205 142 172" stroke="#8FD06A" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M141 196 C116 192 98 172 100 150 C124 152 140 170 141 196Z" fill="#8FD06A"/>
+        <path d="M142 182 C164 172 184 150 182 126 C158 132 140 154 142 182Z" fill="#C6EA4B"/>
+      </g></g>
+
+      <path class="shield" d="M62 262 A78 78 0 0 1 218 262" fill="none" stroke="#C6EA4B" stroke-width="3" stroke-linecap="round"/>
+
+      <g class="bug"><g transform="translate(200,234)">
+        <g class="lock">
+          <g class="ret"><circle r="44" fill="none" stroke="#E8664A" stroke-width="1.3" stroke-dasharray="4 7"/></g>
+          <circle r="34" fill="none" stroke="#F2B33D" stroke-width="1" opacity=".4"/>
+          <path d="M-56 0 h12 M44 0 h12 M0 -56 v12 M0 44 v12" stroke="#E8664A" stroke-width="1.6"/>
+          <rect class="scan" x="-34" y="-1" width="68" height="2" fill="#F2B33D" clip-path="url(#rc)"/>
+        </g>
+        <line class="leg"   x1="-8" y1="2" x2="-16" y2="18" stroke="#E8DCC2" stroke-width="2.2" stroke-linecap="round"/>
+        <line class="leg b" x1="0"  y1="4" x2="-2"  y2="20" stroke="#E8DCC2" stroke-width="2.2" stroke-linecap="round"/>
+        <line class="leg"   x1="8"  y1="2" x2="14"  y2="18" stroke="#E8DCC2" stroke-width="2.2" stroke-linecap="round"/>
+        <ellipse cx="2" cy="-4" rx="20" ry="13" fill="#E8664A"/>
+        <path d="M2 -17 V9" stroke="#0A130F" stroke-width="1.6" opacity=".55"/>
+        <circle cx="-6" cy="-8" r="3" fill="#0A130F" opacity=".55"/><circle cx="10" cy="-1" r="3" fill="#0A130F" opacity=".55"/><circle cx="9" cy="-10" r="2.2" fill="#0A130F" opacity=".55"/>
+        <circle cx="-20" cy="-4" r="7.5" fill="#3A1F18"/>
+        <path d="M-25 -9 Q-34 -22 -40 -20 M-23 -10 Q-27 -24 -32 -26" stroke="#E8DCC2" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      </g></g>
+
+      <g font-family="Alexandria" font-size="11" direction="rtl" text-anchor="start">
+        <g class="read1"><text x="392" y="150" fill="#E8664A">● رصد آفة</text><text x="392" y="165" fill="#9DB0A2">مستوى التهديد: مرتفع</text></g>
+        <g class="read2"><text x="392" y="150" fill="#C6EA4B">✓ تمت الحماية</text><text x="392" y="165" fill="#9DB0A2">النبات في أمان</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div>
+    <p class="tag">نحمي <em>النبات</em>… لنحمي <em>الإنسان</em></p>
+    <a href="#s1" class="cue">ابدأ الرحلة<i></i></a>
+  </div>
+</header>
+
+<div class="rail" id="rail" aria-hidden="true"><div class="bgl"></div><div class="stem" id="stem"></div><div class="bud" id="bud"></div></div>
+
+<main class="wrap">
+
+  <section class="stage" id="s1" data-stage>
+    <div class="num reveal">٠١ · البذرة</div>
+    <h2 class="split">عن البرنامج</h2>
+    <p class="lead reveal">برنامج يجمع بين علوم الحشرات وأمراض النبات وكيمياء المبيدات، لإعداد متخصصين قادرين على حماية المحاصيل بطرق علمية <b>آمنة ومستدامة</b>. يقدّمه قسم مبيدات الآفات بكلية الزراعة، جامعة المنوفية.</p>
+    <div class="stats">
+      <div class="stat reveal" style="--d:0s"><b data-count="1942">٠</b><span>جذور الكلية منذ عام</span></div>
+      <div class="stat reveal" style="--d:.08s"><b data-count="15">٠</b><span>قسمًا علميًا بالكلية</span></div>
+      <div class="stat reveal" style="--d:.16s"><b data-count="9">٠</b><span>مقررات مبيدات في البرنامج</span></div>
+      <div class="stat reveal" style="--d:.24s"><b data-count="8">٠</b><span>مبادئ أساسية للسلامة</span></div>
+    </div>
+  </section>
+
+  <section class="stage" id="s2" data-stage>
+    <div class="num reveal">٠٢ · الجذور</div>
+    <h2 class="split">رؤية الكلية<small>الرؤية التي ينطلق منها البرنامج</small></h2>
+    <p class="lead big reveal">أن تصبح كلية الزراعة جامعة المنوفية <mark>إحدى مؤسسات التعليم العالي الرائدة</mark> على المستوى المحلي والدولي في مجال التعليم العالي، والبحث العلمي، وخدمة المجتمع بما يحقق التنمية الزراعية المستدامة.</p>
+  </section>
+
+  <section class="stage" id="s3" data-stage>
+    <div class="num reveal">٠٣ · البرعم</div>
+    <h2 class="split">رسالة البرنامج</h2>
+    <p class="lead big reveal">خريج متميز <mark>أكاديميًا ومهنيًا</mark>… قادر على المنافسة <mark>محليًا ودوليًا</mark>.</p>
+    <p class="lead reveal muted" style="margin-top:16px;font-size:16px">في إطار رسالة الكلية، يسعى برنامج وقاية النبات (توجه: مبيدات الآفات) إلى إعداد خريج متميز أكاديميًا ومهنيًا في مجال مبيدات الآفات، وقادر على المنافسة في سوق العمل محليًا ودوليًا، واستكمال الدراسة في برامج الدراسات العليا، بما يحقق أهداف التنمية المستدامة، بتوفير بيئة تعليمية وتكنولوجية تتوافق مع معايير الجودة والاعتماد.</p>
+  </section>
+
+  <section class="stage" id="s4" data-stage>
+    <div class="num reveal">٠٤ · الفروع</div>
+    <h2 class="split">أهداف البرنامج</h2>
+    <ol class="objs">
+      <li class="reveal" style="--d:0s"><div><b class="ot">إعداد كفاءات متميزة</b>تأهيل خريجين متميزين أكاديميًا ومهنيًا في مجال وقاية النبات ومبيدات الآفات.</div></li>
+      <li class="reveal" style="--d:.08s"><div><b class="ot">تعزيز التنافسية في سوق العمل</b>تمكين الخريجين من المنافسة بكفاءة في أسواق العمل على المستويين المحلي والدولي.</div></li>
+      <li class="reveal" style="--d:.16s"><div><b class="ot">دعم البحث العلمي والدراسات العليا</b>تهيئة الطلاب وتجهيزهم لاستكمال دراساتهم العليا في البرامج المتقدمة ذات الصلة.</div></li>
+      <li class="reveal" style="--d:.24s"><div><b class="ot">تحقيق التنمية المستدامة</b>المساهمة في تحقيق أهداف التنمية المستدامة من خلال الاستخدام الآمن والفعال لمبيدات الآفات وحماية البيئة.</div></li>
+      <li class="reveal" style="--d:.32s"><div><b class="ot">تطوير البيئة التعليمية الرقمية</b>توفير بيئة تعليمية وتكنولوجية متطورة تتوافق مع معايير الجودة والاعتماد الأكاديمي.</div></li>
+    </ol>
+  </section>
+
+  <!-- IPM LAB -->
+  <section class="stage" id="s5" data-stage>
+    <div class="num reveal">٠٥ · المعمل</div>
+    <h2 class="split">جرّب المكافحة بنفسك<small>آفة في طريقها للنبات… اختار طريقة المكافحة</small></h2>
+    <div class="lab reveal">
+      <div class="lab-stage">
+        <svg viewBox="0 0 360 200" id="labSvg">
+          <path d="M0 168 Q90 160 180 168 T360 166 V200 H0Z" fill="#14281C"/>
+          <path d="M0 168 Q90 160 180 168 T360 166" stroke="#2C4A36" stroke-width="2" fill="none"/>
+          <g id="weeds" fill="#3F6B3A">
+            <path d="M228 168 q-4 -16 2 -26 q2 12 4 26z"/><path d="M240 168 q2 -20 10 -28 q-4 14 -4 28z"/><path d="M262 168 q-6 -14 -2 -24 q4 10 6 24z"/>
+            <path d="M296 168 q2 -18 10 -24 q-4 12 -4 24z"/><path d="M318 168 q-4 -14 2 -22 q2 10 4 22z"/>
+          </g>
+          <g class="plant-g" id="labPlant">
+            <path d="M100 168 C100 140 98 120 102 92" stroke="#8FD06A" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <path d="M101 132 C78 128 62 110 64 90 C86 92 100 108 101 132Z" fill="#8FD06A"/>
+            <path d="M102 116 C122 106 140 88 138 66 C116 72 100 92 102 116Z" fill="#C6EA4B"/>
+            <path d="M101 150 C120 148 132 136 134 120 C116 122 102 134 101 150Z" fill="#8FD06A"/>
+          </g>
+          <!-- sticky trap -->
+          <g id="trap" opacity="0">
+            <rect x="268" y="96" width="4" height="72" fill="#7a6a4a"/>
+            <rect x="248" y="70" width="44" height="40" rx="3" fill="#F5D20B"/>
+            <path d="M252 78 h36 M252 86 h36 M252 94 h36 M252 102 h36" stroke="#d9b800" stroke-width="1"/>
+          </g>
+          <!-- sprayer nozzle + mist -->
+          <g id="spray" opacity="0">
+            <path d="M330 40 L262 74" stroke="#9DB0A2" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="260" cy="75" r="5" fill="#9DB0A2"/>
+            <g id="mist" fill="#BFE3F2"></g>
+          </g>
+          <!-- ladybird -->
+          <g id="lady" opacity="0">
+            <g transform="translate(0,0)">
+              <ellipse cx="0" cy="0" rx="11" ry="9" fill="#E3402F"/>
+              <path d="M0 -9 V9" stroke="#1a1a1a" stroke-width="1.4"/>
+              <circle cx="-5" cy="-2" r="2.2" fill="#1a1a1a"/><circle cx="5" cy="3" r="2.2" fill="#1a1a1a"/><circle cx="4" cy="-4" r="1.8" fill="#1a1a1a"/><circle cx="-4" cy="4" r="1.8" fill="#1a1a1a"/>
+              <circle cx="-11" cy="0" r="4.5" fill="#1a1a1a"/>
+            </g>
+          </g>
+          <!-- hoe sweep (cultural) -->
+          <g id="hoe" opacity="0"><path d="M0 0 L0 -60" stroke="#a07a4a" stroke-width="4" stroke-linecap="round"/><path d="M-12 0 h24" stroke="#9DB0A2" stroke-width="6" stroke-linecap="round"/></g>
+          <!-- pest (aphid cluster leader) -->
+          <g id="pest">
+            <g id="pestInner">
+              <line class="lab-bug-leg" x1="-6" y1="2" x2="-12" y2="12" stroke="#d9e7b0" stroke-width="1.8" stroke-linecap="round"/>
+              <line class="lab-bug-leg b" x1="0" y1="3" x2="-1" y2="13" stroke="#d9e7b0" stroke-width="1.8" stroke-linecap="round"/>
+              <line class="lab-bug-leg" x1="6" y1="2" x2="10" y2="12" stroke="#d9e7b0" stroke-width="1.8" stroke-linecap="round"/>
+              <ellipse cx="2" cy="-3" rx="13" ry="9" fill="#9BC53D"/>
+              <ellipse cx="5" cy="-5" rx="6" ry="3.5" fill="#B9DC6A" opacity=".8"/>
+              <circle cx="-12" cy="-3" r="5" fill="#6E8F2A"/>
+              <circle cx="-14" cy="-4.5" r="1.3" fill="#1a1a1a"/>
+              <path d="M-15 -7 Q-22 -16 -26 -15 M-13 -8 Q-16 -18 -20 -19" stroke="#d9e7b0" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+              <path d="M14 -2 l6 3 M13 1 l6 4" stroke="#6E8F2A" stroke-width="1.6" stroke-linecap="round"/>
+            </g>
+          </g>
+        </svg>
+        <div class="lab-status" id="labStatus">● آفة تقترب</div>
+        <div class="lab-warn" id="labWarn">⚠ آخر خيار · فترة الأمان</div>
+      </div>
+      <div class="methods" id="methods">
+        <button class="mbtn" data-m="cultural"><i>🌱</i>زراعية</button>
+        <button class="mbtn" data-m="mechanical"><i>🪤</i>ميكانيكية</button>
+        <button class="mbtn" data-m="biological"><i>🐞</i>حيوية</button>
+        <button class="mbtn chem" data-m="chemical"><i>🧪</i>كيميائية</button>
+      </div>
+      <div class="lab-card" id="labCard"><div class="hint">اختار طريقة من فوق… وشوف إيه اللي هيحصل للآفة</div></div>
+      <div class="ladder-t">الترتيب الصحيح في المكافحة المتكاملة (IPM):</div>
+      <div class="ladder">
+        <div class="rung"><b>١ · الرصد</b>نعرف الآفة وحجم الإصابة</div>
+        <div class="rung"><b>٢ · الوقاية</b>زراعية وميكانيكية وحيوية</div>
+        <div class="rung c"><b>٣ · الكيميائية</b>عند الحاجة فقط</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage" id="s6" data-stage>
+    <div class="num reveal">٠٦ · الأوراق</div>
+    <h2 class="split">ماذا ستدرس؟<small>مقررات مبيدات الآفات في البرنامج</small></h2>
+    <div class="lvl reveal"><span>المستوى الثالث</span></div>
+    <div class="chips">
+      <div class="crs reveal" style="--d:0s"><i>ت ٣٠٢</i>مبيدات آفات</div>
+      <div class="crs reveal" style="--d:.06s"><i>ت ٣٢١</i>مبيدات حشائش</div>
+      <div class="crs reveal" style="--d:.12s"><i>ت ٣٢٢</i>مبيدات حيوية</div>
+    </div>
+    <div class="lvl reveal"><span>المستوى الرابع</span></div>
+    <div class="chips">
+      <div class="crs reveal" style="--d:0s"><i>ت ٤٠٣</i>توكسيكولوجي</div>
+      <div class="crs reveal" style="--d:.06s"><i>ت ٤٢١</i>تحليل مبيدات</div>
+      <div class="crs reveal" style="--d:.12s"><i>ت ٤٢٢</i>مبيدات فطرية</div>
+      <div class="crs reveal" style="--d:.18s"><i>ت ٤٢٣</i>المكافحة الكيماوية للآفات</div>
+      <div class="crs reveal" style="--d:.24s"><i>ت ٤٢٤</i>مستحضرات مبيدات</div>
+      <div class="crs reveal" style="--d:.30s"><i>ت ٤٢٦</i>التقييم الحيوي للمبيدات</div>
+    </div>
+    <p class="src reveal">المصدر: دليل الطالب ٢٠٢٦/٢٠٢٧</p>
+  </section>
+</main>
+
+<section class="stage safety" id="s7" data-stage>
+  <div class="wrap">
+    <div class="warnbar reveal"></div>
+    <div class="num reveal" style="color:var(--amber)">٠٧ · درع الحماية</div>
+    <h2 class="split">مبادئ السلامة العامة<small>في الحقل والمعمل</small></h2>
+    <div class="grid">%%RULES%%</div>
+    <p class="src reveal">مستندة إلى مقرر «تطبيق المبيدات والسلامة المهنية» · قسم مبيدات الآفات</p>
+  </div>
+</section>
+
+<main class="wrap">
+  <section class="stage" id="s8" data-stage>
+    <div class="num reveal">٠٨ · الحصاد</div>
+    <h2 class="split">من الحقل إلى الطبق<small>دورنا في كل خطوة</small></h2>
+    <div class="journey" id="journey">
+      <div class="jline"></div><div class="jfill" id="jfill"></div>
+      <div class="step" style="--c:var(--red)"><div class="dot">🐛</div><div><b>رصد الآفة</b><span>تعريف الآفة وتقدير خطورتها</span></div></div>
+      <div class="step" style="--c:var(--amber)"><div class="dot">🧪</div><div><b>اختيار الحل</b><span>مكافحة متكاملة واختيار علمي للمبيد</span></div></div>
+      <div class="step"><div class="dot">🛡️</div><div><b>تطبيق آمن</b><span>جرعة صحيحة ووقاية كاملة</span></div></div>
+      <div class="step"><div class="dot">🔬</div><div><b>تحليل المتبقيات</b><span>التأكد من الحدود الآمنة</span></div></div>
+      <div class="step" style="--c:var(--lime)"><div class="dot">🍽️</div><div><b>طبق آمن</b><span>غذاء صحي يصل للإنسان</span></div></div>
+    </div>
+  </section>
+
+  <!-- GAME -->
+  <section class="stage" id="s9" data-stage>
+    <div class="num reveal">٠٩ · التحدي</div>
+    <h2 class="split">اختبر نفسك<small>مهمة في الحقل: كل مرة مواقف مختلفة</small></h2>
+    <div class="game reveal" id="game">
+      <div class="gscreen on" id="gMenu">
+        <p class="ghint">اختار مستواك. كل جولة فيها ٥ مواقف بتتسحب عشوائيًا، وكل ما تجاوب صح المحصول بيكبر.</p>
+        <div class="levels" id="levels"></div>
+      </div>
+      <div class="gscreen" id="gPlay">
+        <div class="hud"><span class="lv" id="hLv"></span><span class="qn" id="hQn"></span></div>
+        <div class="bar" id="hBar"><i id="hBarI"></i></div>
+        <div class="barlbl"><span>صحة المحصول</span><span id="hPct">١٠٠٪</span></div>
+        <div class="field" id="field">
+          <svg viewBox="0 0 360 150">
+            <rect class="skyrect" width="360" height="150" fill="#10241A"/>
+            <g class="sun"><circle cx="300" cy="34" r="14" fill="#F2B33D" opacity=".85"/></g>
+            <g class="gust" stroke="#cfe8d6" stroke-width="1.5" stroke-linecap="round"><path d="M200 40 h50 M260 60 h40 M180 74 h36 M300 50 h40"/></g>
+            <path d="M0 118 Q90 110 180 118 T360 116 V150 H0Z" fill="#183323"/>
+            <g id="crops"></g>
+            <g id="fbugs"></g>
+          </svg>
+        </div>
+        <div class="scn" id="qTag"></div>
+        <div class="q" id="qText"></div>
+        <div class="opts" id="qOpts"></div>
+        <div class="fb" id="qFb"></div>
+        <button class="gbtn" id="qNext" style="display:none">التالي ←</button>
+      </div>
+      <div class="gscreen" id="gEnd">
+        <div class="result">
+          <div class="big" id="rStars"></div>
+          <h3 id="rTitle"></h3>
+          <p id="rText"></p>
+        </div>
+        <div class="gbtns">
+          <button class="gbtn" id="rAgain">جولة جديدة</button>
+          <button class="gbtn ghost" id="rMenu">المستويات</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="end reveal" id="end">
+    <div class="seals">
+      <img class="seal" src="logo.png" alt="شعار كلية الزراعة - جامعة المنوفية" width="112" height="112">
+      <svg class="seal" role="img" aria-label="شعار قسم مبيدات الآفات"><use href="#deptLogo"/></svg>
+    </div>
+    <h3>علم يحمي…<br><span>وحصاد آمن</span></h3>
+    <p>برنامج وقاية النبات · توجه مبيدات الآفات</p>
+  </div>
+</main>
+
+<footer>قسم مبيدات الآفات · كلية الزراعة · جامعة المنوفية</footer>
+
+<script>
+(function(){
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ar=n=>Number(n).toLocaleString('ar-EG',{useGrouping:false});
+const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+/* split headings into words */
+$$('h2.split').forEach(h=>{
+  const small=h.querySelector('small'); if(small) small.remove();
+  const words=h.textContent.trim().split(/\s+/);
+  h.innerHTML=words.map((w,i)=>`<span class="w" style="--i:${i}">${w}</span>`).join(' ');
+  if(small){small.classList.add('w');small.style.setProperty('--i',words.length);h.appendChild(small);}
+});
+
+/* reveal + counters */
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting) return;
+  const el=e.target; el.classList.add('in'); io.unobserve(el);
+  const c=el.querySelector('[data-count]'); if(c) countUp(c);
+}),{threshold:.16,rootMargin:'0px 0px -6% 0px'});
+$$('.reveal,h2.split,.num').forEach(el=>io.observe(el));
+function countUp(el){
+  const to=+el.dataset.count, dur=to>100?1600:1100, t0=performance.now();
+  const from=to>100?1900:0;
+  (function f(t){const p=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-p,3);
+    el.textContent=ar(Math.round(from+(to-from)*e)); if(p<1) requestAnimationFrame(f);})(t0);
+}
+
+/* growth rail + journey */
+const rail=$('#rail'), stem=$('#stem'), bud=$('#bud'), hero=$('#top'), stages=$$('[data-stage]');
+const nodes=stages.map((s,i)=>{const n=document.createElement('div');n.className='node';n.style.bottom=((i+1)/(stages.length+.6)*100)+'%';rail.appendChild(n);return n;});
+const jr=$('#journey'), jfill=$('#jfill'), steps=$$('.step');
+let tick=false;
+function onScroll(){
+  tick=false;
+  const y=scrollY, vh=innerHeight, start=hero.offsetHeight*.55, end=document.documentElement.scrollHeight-vh;
+  const p=Math.min(1,Math.max(0,(y-start)/(end-start)));
+  rail.classList.toggle('show',y>hero.offsetHeight*.5);
+  stem.style.height=(p*100)+'%';
+  nodes.forEach((n,i)=>n.classList.toggle('on',p>=(i+1)/(stages.length+.6)-.02));
+  bud.classList.toggle('on',p>.97);
+  const r=jr.getBoundingClientRect(), mid=vh*.62;
+  const jp=Math.min(1,Math.max(0,(mid-r.top)/(r.height-44)));
+  jfill.style.height=Math.max(0,jp*(r.height-44))+'px';
+  steps.forEach(s=>{const sr=s.getBoundingClientRect();s.classList.toggle('lit',sr.top+sr.height/2<mid)});
+}
+addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(onScroll)}},{passive:true});
+addEventListener('resize',onScroll); onScroll();
+
+/* ambient particles */
+const cv=$('#fx'), cx=cv.getContext('2d'); let W,H,DPR=Math.min(2,devicePixelRatio||1), parts=[];
+function size(){W=cv.width=innerWidth*DPR;H=cv.height=innerHeight*DPR;}
+size(); addEventListener('resize',size);
+const N=RM?0:Math.round(Math.min(46,innerWidth/9));
+for(let i=0;i<N;i++) parts.push({x:Math.random(),y:Math.random(),r:.6+Math.random()*1.8,s:.00012+Math.random()*.00035,a:Math.random()*6.28,h:Math.random()<.75?'198,234,75':'143,208,106',o:.15+Math.random()*.45});
+let lastY=scrollY;
+function draw(){
+  if(document.hidden){requestAnimationFrame(draw);return}
+  const dy=(scrollY-lastY)/innerHeight; lastY=scrollY;
+  cx.clearRect(0,0,W,H);
+  for(const p of parts){
+    p.y-=p.s+dy*.15*p.r; p.a+=.01; p.x+=Math.sin(p.a)*.0004;
+    if(p.y<-.02){p.y=1.02;p.x=Math.random()} if(p.y>1.03)p.y=-.01;
+    cx.beginPath();cx.arc(p.x*W,p.y*H,p.r*DPR,0,6.28);
+    cx.fillStyle=`rgba(${p.h},${p.o*(.6+.4*Math.sin(p.a*2))})`;cx.fill();
+  }
+  requestAnimationFrame(draw);
+}
+if(N) draw();
+
+/* tap leaf burst (outside interactive widgets) */
+if(!RM) addEventListener('pointerdown',e=>{
+  if(e.target.closest('button,a,.game,.lab')) return;
+  for(let i=0;i<7;i++){
+    const d=document.createElement('i'); d.className='burst';
+    d.style.left=e.clientX+'px'; d.style.top=e.clientY+'px';
+    if(i%3==0) d.style.background='#C6EA4B';
+    document.body.appendChild(d);
+    const ang=Math.random()*6.28, dist=30+Math.random()*40;
+    d.animate([{transform:'translate(-50%,-50%) rotate(0) scale(1)',opacity:1},
+      {transform:`translate(${Math.cos(ang)*dist}px,${Math.sin(ang)*dist+20}px) rotate(${Math.random()*360}deg) scale(.4)`,opacity:0}],
+      {duration:700+Math.random()*300,easing:'cubic-bezier(.2,.8,.2,1)'}).onfinish=()=>d.remove();
+  }
+},{passive:true});
+
+/* ================= IPM LAB ================= */
+const M={
+  cultural:{t:'المكافحة الزراعية',d:'تعديل الممارسات الزراعية لتقليل فرص الإصابة من الأساس.',ex:'الدورة الزراعية، إزالة الحشائش ومخلفات المحصول، ميعاد زراعة مناسب، أصناف مقاومة.',pro:'وقائية، قليلة التكلفة، وآمنة على الإنسان والبيئة.',con:'نتيجتها تراكمية وبتحتاج تخطيط من بدري.'},
+  mechanical:{t:'المكافحة الميكانيكية والفيزيائية',d:'اصطياد الآفة أو منعها من الوصول للنبات بوسائل مادية.',ex:'المصائد اللاصقة الصفراء، المصائد الضوئية، الجمع اليدوي، الشِباك.',pro:'من غير متبقيات، وكمان بتساعد في رصد الآفة.',con:'بتحتاج مجهود، ومناسبة أكتر للمساحات المحدودة.'},
+  biological:{t:'المكافحة الحيوية',d:'الاستعانة بالأعداء الطبيعية للآفة.',ex:'أبو العيد (الدعسوقة) بيتغذى على المن، الطفيليات، والكائنات الدقيقة الممرضة للحشرات.',pro:'صديقة للبيئة ومستدامة، ومن غير متبقيات.',con:'أبطأ في النتيجة، وبتتأثر بالرش العشوائي اللي بيقتل الأعداء الحيوية.'},
+  chemical:{t:'المكافحة الكيميائية',d:'استخدام المبيدات لما الإصابة توصل لحد يستدعي التدخل.',ex:'مبيد موصى به، بالجرعة المكتوبة على البطاقة، مع مهمات الوقاية والالتزام بفترة الأمان.',pro:'سريعة وفعالة في السيطرة على الإصابة.',con:'لو اتستخدمت غلط: متبقيات، ومخاطر على الإنسان والبيئة، وظهور مقاومة.'}
+};
+const pest=$('#pest'), plant=$('#labPlant'), status=$('#labStatus'), warn=$('#labWarn'), card=$('#labCard'), btns=$$('.mbtn');
+const svgEl=$('#labSvg');
+let pestX=330, walking=null, busy=false;
+function setPest(x,y=160,rot=0,s=1,flip=1){pest.setAttribute('transform',`translate(${x} ${y}) rotate(${rot}) scale(${s*flip} ${s})`)}
+function resetLab(){
+  busy=false; pest.style.opacity=1; pestX=330; setPest(pestX); svgEl.classList.remove('paused');
+  ['#trap','#spray','#lady','#hoe'].forEach(s=>$(s).setAttribute('opacity',0));
+  $('#weeds').style.opacity=1; $('#weeds').style.transform='';
+  plant.classList.remove('happy'); status.className='lab-status'; status.textContent='● آفة تقترب'; warn.classList.remove('show');
+  btns.forEach(b=>{b.disabled=false});
+  walk();
+}
+function walk(){
+  cancelAnimationFrame(walking);
+  const step=()=>{ if(busy) return;
+    pestX=Math.max(150,pestX-.7); setPest(pestX,160+Math.sin(pestX/4)*.8);
+    plant.classList.toggle('stress',pestX<170);
+    if(pestX<=150){status.textContent='● الآفة وصلت للنبات!';}
+    walking=requestAnimationFrame(step);
+  }; walking=requestAnimationFrame(step);
+}
+function tween(dur,fn){return new Promise(res=>{const t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/dur);fn(p);if(p<1)requestAnimationFrame(f);else res();})(t0)})}
+const ease=p=>p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+async function run(m){
+  if(busy) return; busy=true; cancelAnimationFrame(walking);
+  btns.forEach(b=>{b.disabled=true;b.classList.toggle('on',b.dataset.m===m)});
+  card.innerHTML='<div class="hint">جاري التطبيق…</div>';
+  const x0=pestX;
+  if(m==='biological'){
+    const lady=$('#lady'); lady.setAttribute('opacity',1);
+    await tween(1300,p=>{const e=ease(p);const x=20+(x0-34)*e, y=30+Math.sin(e*3.14)*-20+(135-30)*e;lady.setAttribute('transform',`translate(${x} ${y}) rotate(${10-e*10}) scale(-1 1)`)});
+    svgEl.classList.add('paused');
+    await tween(700,p=>{setPest(x0,160,0,1-p*.9);pest.style.opacity=1-p});
+    await tween(400,p=>{$('#lady').setAttribute('transform',`translate(${x0-14} ${135+Math.sin(p*12)*2}) scale(-1 1)`)});
+  }else if(m==='mechanical'){
+    const trap=$('#trap'); trap.setAttribute('opacity',1);
+    await tween(500,p=>trap.setAttribute('transform',`translate(0 ${(1-ease(p))*80})`));
+    await tween(1100,p=>{const e=ease(p);setPest(x0+(266-x0)*e,160-(160-92)*e,-50*e)});
+    svgEl.classList.add('paused');
+    await tween(500,p=>setPest(266+Math.sin(p*30)*1.2,92,-50));
+  }else if(m==='cultural'){
+    const hoe=$('#hoe'), weeds=$('#weeds'); hoe.setAttribute('opacity',1);
+    await tween(1100,p=>{hoe.setAttribute('transform',`translate(${340-120*p} 168) rotate(${Math.sin(p*18)*12})`);weeds.style.opacity=1-p;});
+    hoe.setAttribute('opacity',0);
+    await tween(1200,p=>{setPest(x0+(390-x0)*ease(p),160,0,1,-1);pest.style.opacity=1-p*.6});
+  }else if(m==='chemical'){
+    warn.classList.add('show');
+    const sp=$('#spray'), mist=$('#mist'); sp.setAttribute('opacity',1); mist.innerHTML='';
+    for(let i=0;i<26;i++){const c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('r',1+Math.random()*2);c.setAttribute('opacity',.8);mist.appendChild(c);c._a=Math.random()*.9+.2;c._d=Math.random();}
+    await tween(1400,p=>{[...mist.children].forEach(c=>{const q=(p*1.6+c._d)%1;c.setAttribute('cx',258-q*(258-x0)*c._a);c.setAttribute('cy',78+q*80);c.setAttribute('opacity',1-q)})});
+    svgEl.classList.add('paused');
+    await tween(700,p=>{setPest(x0,160-p*4,p*180,1);pest.style.opacity=1-p*.85});
+    sp.setAttribute('opacity',0);
+  }
+  plant.classList.remove('stress'); void plant.offsetWidth; plant.classList.add('happy');
+  status.className='lab-status ok'; status.textContent='✓ النبات في أمان';
+  const d=M[m];
+  card.innerHTML=`<div class="anim"><h3>${d.t}</h3><p>${d.d}</p><ul>
+    <li><b>أمثلة:</b><span>${d.ex}</span></li><li><b>مميزاتها:</b><span>${d.pro}</span></li><li><b>${m==='chemical'?'تحذير:':'حدودها:'}</b><span>${d.con}</span></li></ul>
+    <button class="gbtn ghost" id="labAgain">↺ جرّب طريقة تانية</button></div>`;
+  $('#labAgain').onclick=resetLab;
+}
+btns.forEach(b=>b.onclick=()=>run(b.dataset.m));
+new IntersectionObserver(es=>{if(es[0].isIntersecting&&!busy) walk(); else cancelAnimationFrame(walking)},{threshold:.2}).observe($('.lab'));
+setPest(pestX);
+
+/* ================= GAME ================= */
+const LV=[
+ {n:'المتدرّب',e:'🌱',d:'أساسيات السلامة والتعامل الآمن',q:%%L1%%},
+ {n:'المرشد الميداني',e:'🧭',d:'قرارات في الحقل: توقيت ورصد ومكافحة',q:%%L2%%},
+ {n:'الخبير',e:'🏅',d:'مواقف صعبة: تسمم وتخزين وبيئة ومتبقيات',q:%%L3%%}
+];
+const G={lv:0,set:[],i:0,ok:0,hp:100};
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function show(id){$$('.gscreen').forEach(s=>s.classList.toggle('on',s.id===id))}
+function renderLevels(){
+  const best=store.get('pq-best')||{};
+  $('#levels').innerHTML=LV.map((l,i)=>{const s=best[i]||0;return `<button class="lvbtn" data-l="${i}"><div class="badge">${l.e}</div><div><b>المستوى ${ar(i+1)} · ${l.n}</b><span>${l.d}</span></div><div class="stars">${[0,1,2].map(k=>`<span class="${k<s?'s':''}">★</span>`).join('')}</div></button>`}).join('');
+  $$('.lvbtn').forEach(b=>b.onclick=()=>start(+b.dataset.l));
+}
+function pick(l){
+  // avoid repeats: draw from questions not seen recently in this level
+  const key='pq-seen-'+l, all=LV[l].q.map((_,i)=>i);
+  let seen=store.get(key)||[]; let pool=all.filter(i=>!seen.includes(i));
+  if(pool.length<5){seen=[];pool=all;}
+  const chosen=shuffle(pool).slice(0,5); store.set(key,[...seen,...chosen]); return chosen.map(i=>LV[l].q[i]);
+}
+function drawField(){
+  const crops=$('#crops'); crops.innerHTML=''; $('#fbugs').innerHTML='';
+  for(let k=0;k<6;k++){const x=40+k*56;
+    crops.insertAdjacentHTML('beforeend',`<g class="crop" id="cr${k}"><path d="M${x} 118 C${x} 104 ${x-1} 94 ${x+1} 82" stroke="#8FD06A" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M${x} 100 C${x-14} 98 ${x-22} 88 ${x-21} 78 C${x-9} 79 ${x} 88 ${x} 100Z" fill="#8FD06A"/><path d="M${x+1} 92 C${x+13} 86 ${x+22} 76 ${x+21} 64 C${x+8} 67 ${x} 79 ${x+1} 92Z" fill="#C6EA4B"/></g>`);}
+}
+function start(l){
+  G.lv=l;G.set=pick(l);G.i=0;G.ok=0;G.hp=100;drawField();upd();show('gPlay');ask();
+  $('#game').scrollIntoView({behavior:RM?'auto':'smooth',block:'start'});
+}
+function upd(){
+  $('#hLv').textContent=`المستوى ${ar(G.lv+1)} · ${LV[G.lv].n}`;
+  $('#hQn').textContent=`الموقف ${ar(Math.min(G.i+1,5))} من ${ar(5)}`;
+  $('#hBarI').style.width=G.hp+'%'; $('#hBar').classList.toggle('low',G.hp<=40); $('#hPct').textContent=ar(G.hp)+'٪';
+}
+function ask(){
+  const q=G.set[G.i]; upd();
+  const f=$('#field'); f.className='field'+(q.fx?' '+q.fx:'');
+  $('#qTag').textContent=q.tag; $('#qText').textContent=q.s;
+  const opts=shuffle(q.o.map((t,i)=>({t,ok:i===0})));
+  $('#qOpts').innerHTML=opts.map((o,i)=>`<button class="opt" style="--i:${i}" data-ok="${o.ok?1:0}">${o.t}</button>`).join('');
+  $('#qFb').className='fb'; $('#qNext').style.display='none';
+  $$('.opt').forEach(b=>b.onclick=()=>answer(b));
+}
+function answer(b){
+  const ok=b.dataset.ok==='1', q=G.set[G.i];
+  $$('.opt').forEach(o=>{o.disabled=true; if(o.dataset.ok==='1') o.classList.add('right'); else if(o!==b) o.classList.add('dim')});
+  if(ok){G.ok++; const c=$('#cr'+Math.floor(Math.random()*6)); c.classList.remove('boost'); void c.getBBox(); c.classList.add('boost'); }
+  else{b.classList.add('wrong'); G.hp=Math.max(0,G.hp-20);
+    const k=Math.floor(Math.random()*6), c=$('#cr'+k); c.classList.add('sick');
+    const x=40+k*56;
+    $('#fbugs').insertAdjacentHTML('beforeend',`<g class="fbug"><ellipse cx="${x+6}" cy="90" rx="6" ry="4.5" fill="#E8664A"/><circle cx="${x}" cy="90" r="2.8" fill="#3A1F18"/></g>`);
+  }
+  upd();
+  const fb=$('#qFb'); fb.className='fb on '+(ok?'ok':'no');
+  fb.innerHTML=`<b>${ok?'✓ إجابة صحيحة':'✗ مش دي'}</b>${q.x}`;
+  const nb=$('#qNext'); nb.style.display='flex'; nb.textContent=G.i<4?'الموقف التالي ←':'شوف النتيجة ←';
+  nb.onclick=()=>{G.i++; if(G.i<5) ask(); else finish();};
+  fb.scrollIntoView({behavior:RM?'auto':'smooth',block:'nearest'});
+}
+function finish(){
+  const s=G.ok>=5?3:G.ok>=4?2:G.ok>=3?1:0;
+  const best=store.get('pq-best')||{}; if(s>(best[G.lv]||0)){best[G.lv]=s;store.set('pq-best',best)}
+  $('#rStars').innerHTML=[0,1,2].map(k=>k<s?`<span class="s" style="animation-delay:${.15+k*.18}s">★</span>`:'<span class="e">★</span>').join('');
+  const T=[['محتاج تراجع شوية','المحصول اتضرر… راجع مبادئ السلامة وجرّب تاني.'],['بداية كويسة','فيه أساس، بس لسه فيه نقاط محتاجة تركيز.'],['أداء ممتاز','قرارات سليمة في أغلب المواقف.'],['خبير وقاية!','٥ من ٥… المحصول في أمان والمستهلك كمان.']][s];
+  $('#rTitle').textContent=T[0]; $('#rText').textContent=`جاوبت ${ar(G.ok)} من ${ar(5)} صح. ${T[1]}`;
+  show('gEnd'); if(s===3&&!RM) confetti();
+}
+function confetti(){
+  const g=$('#game'); const cols=['#C6EA4B','#8FD06A','#F2B33D','#EDF1E6'];
+  for(let i=0;i<40;i++){const c=document.createElement('i');c.className='confetti';c.style.left=Math.random()*100+'%';c.style.background=cols[i%4];g.appendChild(c);
+    c.animate([{transform:`translateY(-20px) rotate(0)`,opacity:1},{transform:`translateY(${g.offsetHeight*0.8}px) rotate(${360+Math.random()*360}deg)`,opacity:0}],{duration:1400+Math.random()*900,delay:Math.random()*300,easing:'cubic-bezier(.3,.6,.4,1)'}).onfinish=()=>c.remove();}
+}
+$('#rAgain').onclick=()=>start(G.lv);
+$('#rMenu').onclick=()=>{renderLevels();show('gMenu')};
+renderLevels();
+})();
+</script>
+</body>
+</html>
