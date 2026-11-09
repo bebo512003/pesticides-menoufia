@@ -421,6 +421,42 @@ h2.in .w{opacity:1;transform:none;filter:none}
 .jy-ctrl .jy-play{width:auto;padding:10px 14px}
 .jy-ctrl .gbtn[disabled]{opacity:.4}
 
+/* lens game */
+.scope{margin-top:20px;background:linear-gradient(180deg,#112219,#0D1A13);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.scope-hud{display:flex;justify-content:space-between;align-items:center;padding:12px 14px 8px;font-family:var(--display);font-size:13px;color:var(--leaf)}
+.scope-stage{position:relative}
+.scope-stage svg{width:100%;display:block;touch-action:none;cursor:grab}
+.scope-stage svg:active{cursor:grabbing}
+.scope-hint{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-family:var(--display);font-size:12px;padding:5px 12px;border-radius:99px;background:rgba(10,19,15,.75);border:1px solid var(--line);color:var(--text);pointer-events:none;transition:opacity .4s;animation:hintBob 1.6s ease-in-out infinite}
+.scope-hint.off{opacity:0}
+@keyframes hintBob{50%{transform:translate(-50%,-4px)}}
+.fmark{fill:none;stroke:var(--lime);stroke-width:1.6;transform-box:fill-box;transform-origin:center;animation:pop .45s cubic-bezier(.2,.9,.3,1.6)}
+.fmark.friend{stroke:#7CC6E8}
+.scope-chips{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:10px 12px 0}
+.scc{display:flex;align-items:center;gap:6px;padding:7px 8px;border-radius:12px;background:var(--card);border:1px dashed #2f4a3a;font-size:11.5px;line-height:1.35;color:#5d7466;transition:all .35s}
+.scc i{font-style:normal;font-size:15px;filter:grayscale(1) opacity(.5);transition:filter .3s}
+.scc.on{border-style:solid;border-color:var(--leaf);color:var(--text);background:rgba(143,208,106,.08)}
+.scc.on i{filter:none}
+.scc.friend.on{border-color:#7CC6E8;background:rgba(124,198,232,.08)}
+.scope-card{margin:10px 12px 12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;min-height:96px}
+.scope-card .hint{color:var(--muted);font-size:14px;text-align:center;padding:14px 0}
+.scope-card .k{font-family:var(--display);font-size:12px;color:var(--leaf)}
+.scope-card .k.friend{color:#7CC6E8}
+.scope-card h3{font-family:var(--display);font-weight:700;font-size:17px;margin:2px 0 4px}
+.scope-card p{font-size:13.5px;color:var(--muted)}
+.scope-card .anim{animation:cardIn .45s cubic-bezier(.2,.8,.2,1)}
+.scope.done .scope-hud span{color:var(--lime)}
+
+/* certificate */
+.cert{margin-top:14px;padding:14px;border-radius:16px;background:linear-gradient(160deg,#2a2412,#13241C);border:1px solid rgba(242,179,61,.4);text-align:right}
+.cert b{font-family:var(--display);font-size:16px;display:block}
+.cert p{font-size:12.5px;color:var(--muted);margin:2px 0 10px}
+.cert input{width:100%;font:inherit;font-size:15px;color:var(--text);background:#0E1C15;border:1px solid var(--line);border-radius:12px;padding:11px 12px;outline:none;direction:rtl}
+.cert input:focus{border-color:var(--amber)}
+.cert .gbtn{background:var(--amber)}
+.cert img{width:100%;border-radius:12px;margin-top:12px;display:block;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.cert .row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+
 /* end */
 .end{text-align:center;padding:100px 0 50px}
 .seals{display:flex;justify-content:center;gap:22px;margin-bottom:26px}
@@ -432,7 +468,12 @@ img.seal{padding:4px}
 .end h3{font-family:var(--display);font-weight:800;font-size:clamp(28px,8vw,44px);line-height:1.35}
 .end h3 span{color:var(--lime)}
 .end p{color:var(--muted);margin-top:10px;font-size:14px}
-footer{border-top:1px solid var(--line);padding:22px 24px 34px;text-align:center;font-size:12px;color:var(--muted)}
+footer{border-top:1px solid var(--line);padding:26px max(26px,env(safe-area-inset-right)) calc(30px + env(safe-area-inset-bottom));text-align:center;font-size:12px;color:var(--muted)}
+.credit{display:inline-flex;flex-direction:column;align-items:center;gap:2px;padding:14px 22px;border-radius:16px;background:var(--card);border:1px solid var(--line);margin-bottom:16px}
+.credit .cr-k{font-family:var(--display);font-size:11.5px;color:var(--leaf)}
+.credit b{font-family:var(--display);font-weight:700;font-size:16px;color:var(--text)}
+.credit span:last-child{font-size:12px;color:var(--muted)}
+.foot-org{opacity:.8}
 
 /* tap burst */
 .burst{position:fixed;width:10px;height:6px;background:var(--leaf);border-radius:0 100% 0 100%;pointer-events:none;z-index:50}
@@ -747,8 +788,65 @@ footer{border-top:1px solid var(--line);padding:22px 24px 34px;text-align:center
     </div>
   </section>
 
+  <!-- LENS GAME -->
+  <section class="stage" id="sScope" data-stage>
+    <div class="num reveal">٠٦ · العدسة</div>
+    <h2 class="split">اكتشف الآفة<small>اسحب العدسة على الورقة… فيه ٥ آفات وصديق واحد مستخبيين</small></h2>
+    <div class="scope reveal" id="scope">
+      <div class="scope-hud"><span id="scCount">اكتشفت ٠ من ٦</span><button class="gback" id="scReset">↺ من الأول</button></div>
+      <div class="scope-stage">
+        <svg id="scSvg" viewBox="0 0 360 260">
+          <defs>
+            <g id="leafArt">
+              <path d="M28 214 C40 120 120 46 236 34 C290 28 324 40 336 52 C330 120 290 196 196 224 C120 246 64 238 28 214Z" fill="#3F8A3A"/>
+              <path d="M28 214 C40 120 120 46 236 34 C290 28 324 40 336 52 C330 120 290 196 196 224 C120 246 64 238 28 214Z" fill="url(#leafSheen)"/>
+              <path d="M30 212 C120 170 220 110 334 54" stroke="#BFE39A" stroke-width="3" fill="none" stroke-linecap="round" opacity=".7"/>
+              <g stroke="#A8D47E" stroke-width="1.6" fill="none" opacity=".55" stroke-linecap="round">
+                <path d="M88 180 C80 150 84 120 100 96"/><path d="M128 158 C124 126 134 96 156 72"/><path d="M178 132 C178 104 192 78 214 56"/><path d="M228 106 C232 86 248 64 270 46"/><path d="M276 82 C284 68 300 56 316 48"/>
+                <path d="M98 174 C110 196 130 214 156 226"/><path d="M146 150 C164 176 186 196 216 210"/><path d="M196 124 C218 148 240 166 270 178"/><path d="M246 98 C268 116 288 128 310 132"/>
+              </g>
+            </g>
+            <linearGradient id="leafSheen" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#1f4d24" stop-opacity=".55"/><stop offset=".6" stop-color="#58a24a" stop-opacity="0"/><stop offset="1" stop-color="#9fd27a" stop-opacity=".25"/></linearGradient>
+            <g id="pestArt">
+              <!-- 0 aphids -->
+              <g transform="translate(262 84)"><ellipse cx="0" cy="0" rx="3.2" ry="2.3" fill="#B4DD5A"/><circle cx="-2.6" cy="-.4" r=".7" fill="#222"/><ellipse cx="6" cy="3" rx="2.6" ry="1.9" fill="#A6D04A"/><ellipse cx="2" cy="6" rx="2.2" ry="1.6" fill="#B4DD5A"/><path d="M3 -1 l2 -1 M8 2 l2 -1" stroke="#7a9a2a" stroke-width=".6"/></g>
+              <!-- 1 whitefly -->
+              <g transform="translate(118 150)"><ellipse cx="-2" cy="0" rx="3.4" ry="1.8" fill="#FBFBF5" transform="rotate(-25 -2 0)"/><ellipse cx="2" cy="0" rx="3.4" ry="1.8" fill="#FBFBF5" transform="rotate(25 2 0)"/><ellipse cx="0" cy=".5" rx="1" ry="2" fill="#F2D35B"/></g>
+              <!-- 2 spider mite -->
+              <g transform="translate(204 176)"><path d="M-8 -6 L8 6 M-8 5 L7 -6 M0 -9 V9" stroke="#fff" stroke-width=".35" opacity=".55"/><circle r="1.9" fill="#D63A2A"/><path d="M-1.5 -1 l-2 -1.5 M-1.5 0 l-2.3 0 M-1.5 1 l-2 1.5 M-1 1.6 l-1 2 M1.5 -1 l2 -1.5 M1.5 0 l2.3 0 M1.5 1 l2 1.5 M1 1.6 l1 2" stroke="#8a1f15" stroke-width=".5"/></g>
+              <!-- 3 thrips -->
+              <g transform="translate(300 118) rotate(-30)"><ellipse rx="3.8" ry=".9" fill="#5a3b1e"/><path d="M-6 3 h7 M-4 5 h9 M-7 -3 h6" stroke="#dfe9e0" stroke-width=".5" opacity=".7"/></g>
+              <!-- 4 egg mass -->
+              <g transform="translate(84 116)"><ellipse rx="6.5" ry="4.2" fill="#E3CFA0"/><g fill="#F6EBCB"><circle cx="-3" cy="-1" r=".9"/><circle cx="0" cy="-1.6" r=".9"/><circle cx="3" cy="-.8" r=".9"/><circle cx="-1.5" cy="1.3" r=".9"/><circle cx="1.6" cy="1.4" r=".9"/></g><ellipse rx="6.5" ry="4.2" fill="#C9AE78" opacity=".35"/></g>
+              <!-- 5 ladybird (friend) -->
+              <g transform="translate(168 94)"><circle r="3.4" fill="#E3402F"/><path d="M0 -3.4 V3.4" stroke="#111" stroke-width=".5"/><circle cx="-1.6" cy="-1" r=".7" fill="#111"/><circle cx="1.5" cy="1" r=".7" fill="#111"/><circle cx="-1.2" cy="1.6" r=".6" fill="#111"/><circle cx="1.3" cy="-1.6" r=".6" fill="#111"/><circle cx="-3.6" cy="0" r="1.4" fill="#111"/></g>
+            </g>
+            <clipPath id="lensClip"><circle id="lensC" cx="200" cy="120" r="52"/></clipPath>
+          </defs>
+          <rect width="360" height="260" fill="#0E1C15"/>
+          <use href="#leafArt"/>
+          <use href="#pestArt" opacity=".22"/>
+          <g id="foundBase"></g>
+          <g clip-path="url(#lensClip)">
+            <rect width="360" height="260" fill="#0E1C15"/>
+            <g id="zoomG"><use href="#leafArt"/><use href="#pestArt"/><g id="foundZoom"></g></g>
+          </g>
+          <g id="lensRing" pointer-events="none">
+            <circle id="lensO" cx="200" cy="120" r="52" fill="none" stroke="#EDF1E6" stroke-width="5"/>
+            <circle id="lensI" cx="200" cy="120" r="48" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="2"/>
+            <path id="lensH" d="M237 157 L262 182" stroke="#EDF1E6" stroke-width="10" stroke-linecap="round"/>
+            <path id="lensX" d="M196 120 h8 M200 116 v8" stroke="#fff" stroke-opacity=".5" stroke-width="1.2"/>
+          </g>
+        </svg>
+        <div class="scope-hint" id="scHint">☝️ اسحب العدسة</div>
+      </div>
+      <div class="scope-chips" id="scChips"></div>
+      <div class="scope-card" id="scCard"><div class="hint">مرّر مركز العدسة على أي حاجة غريبة على الورقة…</div></div>
+    </div>
+  </section>
+
   <section class="stage" id="s6" data-stage>
-    <div class="num reveal">٠٦ · الأوراق</div>
+    <div class="num reveal">٠٧ · الأوراق</div>
     <h2 class="split">ماذا ستدرس؟<small>مقررات مبيدات الآفات في البرنامج</small></h2>
     <div class="seg reveal" id="seg" data-l="3"><i class="ind"></i><button class="on" data-l="3">المستوى الثالث</button><button data-l="4">المستوى الرابع</button></div>
     <div class="cgrid" id="cgrid"></div>
@@ -760,7 +858,7 @@ footer{border-top:1px solid var(--line);padding:22px 24px 34px;text-align:center
 <section class="stage safety" id="s7" data-stage>
   <div class="wrap">
     <div class="warnbar reveal"></div>
-    <div class="num reveal" style="color:var(--amber)">٠٧ · درع الحماية</div>
+    <div class="num reveal" style="color:var(--amber)">٠٨ · درع الحماية</div>
     <h2 class="split">مبادئ السلامة العامة<small>في الحقل والمعمل</small></h2>
     <div class="ppe reveal" id="ppe">
       <div class="ppe-top"><b>جهّز نفسك قبل الرش</b><span id="ppeCount">٠ من ٥</span></div>
@@ -841,7 +939,7 @@ footer{border-top:1px solid var(--line);padding:22px 24px 34px;text-align:center
 
 <main class="wrap">
   <section class="stage" id="s8" data-stage>
-    <div class="num reveal">٠٨ · الحصاد</div>
+    <div class="num reveal">٠٩ · الحصاد</div>
     <h2 class="split">من الحقل إلى الطبق<small>تابع رحلة ثمرة الطماطم… ودورنا في كل محطة</small></h2>
     <div class="jy reveal" id="jy">
       <div class="jy-stage">
@@ -937,7 +1035,7 @@ footer{border-top:1px solid var(--line);padding:22px 24px 34px;text-align:center
 
   <!-- GAME -->
   <section class="stage" id="s9" data-stage>
-    <div class="num reveal">٠٩ · التحدي</div>
+    <div class="num reveal">١٠ · التحدي</div>
     <h2 class="split">اختبر نفسك<small>مهمة في الحقل: كل مرة مواقف مختلفة</small></h2>
     <div class="game reveal" id="game">
       <div class="gscreen on" id="gMenu">
@@ -970,6 +1068,13 @@ footer{border-top:1px solid var(--line);padding:22px 24px 34px;text-align:center
           <h3 id="rTitle"></h3>
           <p id="rText"></p>
         </div>
+        <div class="cert" id="cert" hidden>
+          <b>🎓 تستاهل شهادة «خبير وقاية»</b>
+          <p>اكتب اسمك وطلّع شهادة تشاركها. (شهادة تحفيزية للتحدي، مش شهادة رسمية)</p>
+          <input id="certName" maxlength="40" placeholder="اسمك هنا" autocomplete="name">
+          <button class="gbtn" id="certMake">✨ اطلع شهادتي</button>
+          <div id="certOut"></div>
+        </div>
         <div class="gbtns">
           <button class="gbtn" id="rAgain">جولة جديدة</button>
           <button class="gbtn ghost" id="rMenu">المستويات</button>
@@ -988,7 +1093,10 @@ footer{border-top:1px solid var(--line);padding:22px 24px 34px;text-align:center
   </div>
 </main>
 
-<footer>قسم مبيدات الآفات · كلية الزراعة · جامعة المنوفية</footer>
+<footer>
+  <div class="credit reveal"><span class="cr-k">إعداد الطالب</span><b>مرقس مجدي راغب بولس</b><span>الفرقة الرابعة · برنامج وقاية النبات (توجه مبيدات الآفات)</span></div>
+  <div class="foot-org">قسم مبيدات الآفات · كلية الزراعة · جامعة المنوفية</div>
+</footer>
 
 <script>
 (function(){
@@ -1058,7 +1166,7 @@ if(N) draw();
 
 /* tap leaf burst (outside interactive widgets) */
 if(!RM) addEventListener('pointerdown',e=>{
-  if(e.target.closest('button,a,.game,.lab,.otree,.ppe,.fc,.seg,.jy')) return;
+  if(e.target.closest('button,a,input,.game,.lab,.otree,.ppe,.fc,.seg,.jy,.scope')) return;
   for(let i=0;i<7;i++){
     const d=document.createElement('i'); d.className='burst';
     d.style.left=e.clientX+'px'; d.style.top=e.clientY+'px';
@@ -1133,7 +1241,7 @@ async function run(m){
     sp.setAttribute('opacity',0);
   }
   plant.classList.remove('stress'); void plant.offsetWidth; plant.classList.add('happy');
-  status.className='lab-status ok'; status.textContent='✓ النبات في أمان';
+  status.className='lab-status ok'; status.textContent='✓ النبات في أمان'; buzz(40);
   const d=M[m];
   card.innerHTML=`<div class="anim"><h3>${d.t}</h3><p>${d.d}</p><ul>
     <li><b>أمثلة:</b><span>${d.ex}</span></li><li><b>مميزاتها:</b><span>${d.pro}</span></li><li><b>${m==='chemical'?'تحذير:':'حدودها:'}</b><span>${d.con}</span></li></ul>
@@ -1188,8 +1296,56 @@ function ppeUpd(){
   $('#ppeMsg').textContent=n===0?'اضغط على كل قطعة عشان تلبسها… الرذاذ الأحمر هو مصدر الخطر.':n===5?'✓ جاهز للرش بأمان: الحماية كاملة':`لسه ناقص: ${miss.join('، ')}`;
 }
 $$('.pbtn').forEach(b=>b.onclick=()=>{const k=b.dataset.k; worn.has(k)?worn.delete(k):worn.add(k);
-  b.classList.toggle('on',worn.has(k)); document.querySelector(`.pl[data-k="${k}"]`).classList.toggle('on',worn.has(k)); ppeUpd();});
+  buzz(worn.has(k)?20:10); b.classList.toggle('on',worn.has(k)); if(worn.size===5) buzz([30,50,30,50,90]); document.querySelector(`.pl[data-k="${k}"]`).classList.toggle('on',worn.has(k)); ppeUpd();});
 ppeUpd();
+
+/* ================= HAPTICS ================= */
+const buzz=p=>{try{if(navigator.vibrate)navigator.vibrate(p)}catch(e){}};
+
+/* ================= LENS GAME ================= */
+const SP=[
+  {x:265,y:87,e:'🟢',n:'المنّ',d:'حشرات ماصة صغيرة بتتجمع على الأوراق والقمم الحديثة، بتفرز ندوة عسلية، وبعض أنواعها بينقل فيروسات للنبات.'},
+  {x:118,y:150,e:'🦋',n:'الذبابة البيضاء',d:'حشرة ماصة أجنحتها بيضا، بتعيش غالبًا على السطح السفلي للورقة، وبتفرز ندوة عسلية وممكن تنقل فيروسات نباتية.'},
+  {x:204,y:176,e:'🕷️',n:'العنكبوت الأحمر',d:'مش حشرة! ده من العنكبوتيات وله ٨ أرجل. بيسبب تبقّع واصفرار الأوراق، وفي الإصابة الشديدة بينسج خيوط دقيقة.'},
+  {x:300,y:118,e:'🪡',n:'التربس',d:'حشرة صغيرة جدًا ورفيعة، بتخدش أنسجة الورقة وتمتص العصارة، فيظهر على الورقة تفضّض أو بقع فضية.'},
+  {x:84,y:116,e:'🥚',n:'لطعة بيض',d:'لطعة بيض دودة ورق القطن، بتحطها الأنثى على الورقة ومغطاة بحراشيف من جسمها. اكتشافها بدري بيسهّل المكافحة قبل الفقس.'},
+  {x:168,y:94,e:'🐞',n:'أبو العيد',d:'مش آفة! أبو العيد من الأعداء الحيوية وبيتغذى على المن. وجوده في الحقل علامة كويسة، ولازم نحافظ عليه من الرش العشوائي.',f:1}
+];
+(function(){
+  const svg=$('#scSvg'), lc=$('#lensC'), lo=$('#lensO'), li=$('#lensI'), lh=$('#lensH'), lx=$('#lensX'), zg=$('#zoomG');
+  const found=new Set(); let L={x:200,y:120}, drag=false, touchOff=0, idle=true;
+  $('#scChips').innerHTML=SP.map((p,i)=>`<div class="scc${p.f?' friend':''}" id="scc${i}"><i>${p.e}</i><span>؟؟</span></div>`).join('');
+  function place(x,y){
+    L.x=Math.max(20,Math.min(340,x)); L.y=Math.max(20,Math.min(240,y));
+    [lc,lo,li].forEach(c=>{c.setAttribute('cx',L.x);c.setAttribute('cy',L.y)});
+    lh.setAttribute('d',`M${L.x+37} ${L.y+37} L${L.x+62} ${L.y+62}`);
+    lx.setAttribute('d',`M${L.x-4} ${L.y} h8 M${L.x} ${L.y-4} v8`);
+    zg.setAttribute('transform',`translate(${L.x} ${L.y}) scale(2.2) translate(${-L.x} ${-L.y})`);
+    if(!idle) SP.forEach((p,i)=>{ if(!found.has(i) && Math.hypot(p.x-L.x,p.y-L.y)<11) discover(i); });
+  }
+  function discover(i){
+    found.add(i); const p=SP[i];
+    const ring=`<circle class="fmark${p.f?' friend':''}" cx="${p.x}" cy="${p.y}" r="9"/>`;
+    $('#foundBase').insertAdjacentHTML('beforeend',ring); $('#foundZoom').insertAdjacentHTML('beforeend',ring);
+    const c=$('#scc'+i); c.classList.add('on'); c.querySelector('span').textContent=p.n;
+    $('#scCard').innerHTML=`<div class="anim"><div class="k${p.f?' friend':''}">${p.f?'💙 صديق مش عدو':'✓ تم الرصد'} · ${ar(found.size)} من ${ar(SP.length)}</div><h3>${p.e} ${p.n}</h3><p>${p.d}</p></div>`;
+    $('#scCount').textContent=`اكتشفت ${ar(found.size)} من ${ar(SP.length)}`;
+    buzz(p.f?[20,40,20]:30);
+    if(found.size===SP.length){ $('#scope').classList.add('done'); $('#scCount').textContent='🎉 رصد كامل!'; buzz([40,60,40,60,80]);
+      setTimeout(()=>{$('#scCard').insertAdjacentHTML('beforeend','<div class="anim" style="margin-top:10px;font-family:var(--display);color:var(--lime);font-size:14px">رصد كامل: ٥ آفات… وصديق لازم نحميه. ده أول خطوة في المكافحة المتكاملة.</div>')},600); }
+  }
+  function pt(e){const m=svg.getScreenCTM().inverse();const q=new DOMPoint(e.clientX,e.clientY).matrixTransform(m);return q}
+  svg.addEventListener('pointerdown',e=>{idle=false;drag=true;touchOff=e.pointerType==='touch'?46:0;svg.setPointerCapture(e.pointerId);$('#scHint').classList.add('off');const q=pt(e);place(q.x,q.y-touchOff)});
+  svg.addEventListener('pointermove',e=>{if(!drag)return;const q=pt(e);place(q.x,q.y-touchOff)});
+  ['pointerup','pointercancel'].forEach(t=>svg.addEventListener(t,()=>drag=false));
+  $('#scReset').onclick=()=>{found.clear();$('#foundBase').innerHTML='';$('#foundZoom').innerHTML='';$('#scope').classList.remove('done');
+    SP.forEach((p,i)=>{const c=$('#scc'+i);c.classList.remove('on');c.querySelector('span').textContent='؟؟'});
+    $('#scCount').textContent=`اكتشفت ٠ من ${ar(SP.length)}`;$('#scCard').innerHTML='<div class="hint">مرّر مركز العدسة على أي حاجة غريبة على الورقة…</div>';place(200,120)};
+  place(200,120);
+  // idle wobble so people notice the lens
+  let t0=performance.now();
+  (function wob(t){ if(!idle) return; if(!RM){const a=(t-t0)/900; place(200+Math.sin(a)*22,120+Math.cos(a*1.3)*10);} requestAnimationFrame(wob)})(t0);
+})();
 
 /* ================= JOURNEY ================= */
 const JS=[
@@ -1270,6 +1426,7 @@ function ask(){
 function answer(b){
   const ok=b.dataset.ok==='1', q=G.set[G.i];
   $$('.opt').forEach(o=>{o.disabled=true; if(o.dataset.ok==='1') o.classList.add('right'); else if(o!==b) o.classList.add('dim')});
+  buzz(ok?35:[70,50,70]);
   if(ok){G.ok++; const c=$('#cr'+Math.floor(Math.random()*6)); c.classList.remove('boost'); void c.getBBox(); c.classList.add('boost'); }
   else{b.classList.add('wrong'); G.hp=Math.max(0,G.hp-20);
     const k=Math.floor(Math.random()*6), c=$('#cr'+k); c.classList.add('sick');
@@ -1289,7 +1446,8 @@ function finish(){
   $('#rStars').innerHTML=[0,1,2].map(k=>k<s?`<span class="s" style="animation-delay:${.15+k*.18}s">★</span>`:'<span class="e">★</span>').join('');
   const T=[['محتاج تراجع شوية','المحصول اتضرر… راجع مبادئ السلامة وجرّب تاني.'],['بداية كويسة','فيه أساس، بس لسه فيه نقاط محتاجة تركيز.'],['أداء ممتاز','قرارات سليمة في أغلب المواقف.'],['خبير وقاية!','٥ من ٥… المحصول في أمان والمستهلك كمان.']][s];
   $('#rTitle').textContent=T[0]; $('#rText').textContent=`جاوبت ${ar(G.ok)} من ${ar(5)} صح. ${T[1]}`;
-  show('gEnd'); if(s===3&&!RM) confetti();
+  const certOK=G.lv===3&&G.ok>=4; $('#cert').hidden=!certOK; $('#certOut').innerHTML='';
+  show('gEnd'); if(s===3&&!RM) confetti(); if(s===3) buzz([40,60,40,60,100]);
 }
 function confetti(){
   const g=$('#game'); const cols=['#C6EA4B','#8FD06A','#F2B33D','#EDF1E6'];
@@ -1297,6 +1455,50 @@ function confetti(){
     c.animate([{transform:`translateY(-20px) rotate(0)`,opacity:1},{transform:`translateY(${g.offsetHeight*0.8}px) rotate(${360+Math.random()*360}deg)`,opacity:0}],{duration:1400+Math.random()*900,delay:Math.random()*300,easing:'cubic-bezier(.3,.6,.4,1)'}).onfinish=()=>c.remove();}
 }
 $('#rAgain').onclick=()=>start(G.lv);
+function loadImg(src){return new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src=src})}
+async function makeCert(){
+  const name=($('#certName').value||'').trim().slice(0,40);
+  if(!name){$('#certName').focus();$('#certName').style.borderColor='var(--red)';buzz(60);return}
+  $('#certName').style.borderColor='';
+  try{await Promise.all([document.fonts.load('800 100px Alexandria'),document.fonts.load('500 40px Alexandria'),document.fonts.load('400 30px "IBM Plex Sans Arabic"')])}catch(e){}
+  const W=1080,H=1350,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
+  const g=x.createRadialGradient(W/2,H*.62,50,W/2,H*.55,900);g.addColorStop(0,'#16301F');g.addColorStop(1,'#0A130F');x.fillStyle=g;x.fillRect(0,0,W,H);
+  x.globalAlpha=.06;x.strokeStyle='#8FD06A';x.lineWidth=1;for(let i=0;i<W;i+=40){x.beginPath();x.moveTo(i,0);x.lineTo(i,H);x.stroke()}for(let j=0;j<H;j+=40){x.beginPath();x.moveTo(0,j);x.lineTo(W,j);x.stroke()}x.globalAlpha=1;
+  const rr=(X,Y,w,h,r)=>{x.beginPath();x.moveTo(X+r,Y);x.arcTo(X+w,Y,X+w,Y+h,r);x.arcTo(X+w,Y+h,X,Y+h,r);x.arcTo(X,Y+h,X,Y,r);x.arcTo(X,Y,X+w,Y,r);x.closePath()};
+  x.strokeStyle='#C6EA4B';x.lineWidth=4;rr(44,44,W-88,H-88,36);x.stroke();x.strokeStyle='rgba(198,234,75,.3)';x.lineWidth=1.5;rr(62,62,W-124,H-124,26);x.stroke();
+  const [l1,l2]=await Promise.all([loadImg('logo.png'),loadImg('dept-logo.svg')]);
+  const disc=(img,cx)=>{x.save();x.beginPath();x.arc(cx,170,72,0,7);x.fillStyle='#fff';x.fill();x.clip();if(img)x.drawImage(img,cx-68,102,136,136);x.restore();x.strokeStyle='rgba(143,208,106,.35)';x.lineWidth=6;x.beginPath();x.arc(cx,170,78,0,7);x.stroke()};
+  disc(l1,W/2+100);disc(l2,W/2-100);
+  x.direction='rtl';x.textAlign='center';x.textBaseline='alphabetic';
+  x.fillStyle='#8FD06A';x.font='500 34px Alexandria, sans-serif';x.fillText('شهادة تحدي «اختبر نفسك»',W/2,330);
+  x.fillStyle='#C6EA4B';x.font='800 118px Alexandria, sans-serif';x.fillText('خبير وقاية',W/2,470);
+  // shield + sprout emblem
+  x.save();x.translate(W/2,600);x.strokeStyle='#C6EA4B';x.lineWidth=5;x.fillStyle='rgba(198,234,75,.08)';x.beginPath();x.moveTo(0,-62);x.lineTo(52,-42);x.lineTo(52,4);x.bezierCurveTo(52,40,26,60,0,70);x.bezierCurveTo(-26,60,-52,40,-52,4);x.lineTo(-52,-42);x.closePath();x.fill();x.stroke();
+  x.strokeStyle='#8FD06A';x.lineWidth=6;x.lineCap='round';x.beginPath();x.moveTo(0,40);x.bezierCurveTo(0,20,-2,0,2,-26);x.stroke();
+  x.fillStyle='#8FD06A';x.beginPath();x.moveTo(0,8);x.bezierCurveTo(-24,6,-36,-12,-34,-30);x.bezierCurveTo(-12,-28,0,-12,0,8);x.fill();
+  x.fillStyle='#C6EA4B';x.beginPath();x.moveTo(2,-6);x.bezierCurveTo(22,-14,34,-32,32,-52);x.bezierCurveTo(12,-46,0,-28,2,-6);x.fill();x.restore();
+  x.fillStyle='#9DB0A2';x.font='400 36px "IBM Plex Sans Arabic", sans-serif';x.fillText('تُمنح إلى',W/2,750);
+  let fs=84;x.font=`700 ${fs}px Alexandria, sans-serif`;while(x.measureText(name).width>W-220&&fs>40){fs-=4;x.font=`700 ${fs}px Alexandria, sans-serif`}
+  x.fillStyle='#EDF1E6';x.fillText(name,W/2,860);
+  x.strokeStyle='rgba(198,234,75,.5)';x.lineWidth=2;x.beginPath();x.moveTo(W/2-260,890);x.lineTo(W/2+260,890);x.stroke();
+  x.fillStyle='#EDF1E6';x.font='400 34px "IBM Plex Sans Arabic", sans-serif';
+  x.fillText('لاجتياز تحدي المستوى الاستشاري',W/2,960);
+  x.fillText(`بنتيجة ${ar(G.ok)} من ${ar(5)}`,W/2,1010);
+  x.font='48px sans-serif';x.fillStyle='#F2B33D';x.fillText([0,1,2].map(k=>k<(G.ok>=5?3:2)?'★':'☆').join(' '),W/2,1080);
+  x.fillStyle='#9DB0A2';x.font='400 26px "IBM Plex Sans Arabic", sans-serif';x.fillText(new Date().toLocaleDateString('ar-EG',{year:'numeric',month:'long',day:'numeric'}),W/2,1135);
+  x.fillStyle='#8FD06A';x.font='500 28px Alexandria, sans-serif';x.fillText('برنامج وقاية النبات · توجه مبيدات الآفات',W/2,1205);
+  x.fillStyle='#9DB0A2';x.font='400 24px "IBM Plex Sans Arabic", sans-serif';x.fillText('قسم مبيدات الآفات · كلية الزراعة · جامعة المنوفية',W/2,1245);
+  x.fillStyle='rgba(157,176,162,.6)';x.font='400 19px "IBM Plex Sans Arabic", sans-serif';x.fillText('شهادة تحفيزية للتحدي التفاعلي · غير رسمية',W/2,1280);
+  const url=c.toDataURL('image/png');
+  $('#certOut').innerHTML=`<img src="${url}" alt="شهادة خبير وقاية"><div class="row" style="margin-top:8px"><button class="gbtn" id="certShare">📤 مشاركة</button><a class="gbtn ghost" id="certDl" download="شهادة-خبير-وقاية.png" href="${url}" style="text-decoration:none">⬇ تحميل</a></div>`;
+  buzz([30,40,60]);
+  $('#certShare').onclick=async()=>{
+    try{const blob=await (await fetch(url)).blob();const f=new File([blob],'shahada-khabeer-wiqaya.png',{type:'image/png'});
+      if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:'شهادة خبير وقاية',text:'اجتزت تحدي المستوى الاستشاري 🌱'});return}}catch(e){}
+    $('#certDl').click();
+  };
+}
+$('#certMake').onclick=makeCert;
 $('#gBack').onclick=()=>{renderLevels();show('gMenu');$('#game').scrollIntoView({behavior:RM?'auto':'smooth',block:'start'})};
 $('#rMenu').onclick=()=>{renderLevels();show('gMenu')};
 renderLevels();
