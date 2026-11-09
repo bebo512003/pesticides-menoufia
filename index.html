@@ -27,6 +27,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:
   mask-image:radial-gradient(60% 50% at 50% 60%,#000,transparent)}
 .top{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--muted);padding:0 24px;position:relative;z-index:2}
 .top b{color:var(--text);font-weight:500}
+.brand{display:flex;align-items:center;gap:10px;line-height:1.45}
+.brand img{width:46px;height:46px;border-radius:50%;background:#fff;padding:2px;box-shadow:0 0 0 1px var(--line),0 6px 18px rgba(0,0,0,.35)}
 .chip{border:1px solid var(--line);border-radius:99px;padding:4px 12px;font-family:var(--display);font-size:11px;letter-spacing:.02em}
 .hero-txt{text-align:center;padding:0 24px;position:relative;z-index:2}
 .hello{font-family:var(--display);font-weight:300;font-size:15px;color:var(--leaf);opacity:0;animation:up .8s .2s forwards}
@@ -129,7 +131,7 @@ h2 small{display:block;font-size:14px;font-weight:300;color:var(--muted);margin-
 
 /* end */
 .end{text-align:center;padding:110px 0 60px}
-.end .seal{width:120px;height:120px;margin:0 auto 22px}
+.end .seal{display:block;width:128px;height:128px;margin:0 auto 24px;border-radius:50%;background:#fff;padding:4px;box-shadow:0 0 0 6px rgba(143,208,106,.12),0 0 0 7px var(--line),0 18px 50px rgba(0,0,0,.5)}
 .end h3{font-family:var(--display);font-weight:800;font-size:clamp(28px,8vw,44px);line-height:1.35}
 .end h3 span{color:var(--lime)}
 .end p{color:var(--muted);margin-top:10px;font-size:14px}
@@ -145,7 +147,7 @@ footer{border-top:1px solid var(--line);padding:22px 24px 34px;text-align:center
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
   <div class="top">
-    <div>جامعة المنوفية · <b>كلية الزراعة</b></div>
+    <div class="brand"><img src="logo.png" alt="شعار كلية الزراعة - جامعة المنوفية" width="46" height="46"><span>جامعة المنوفية<br><b>كلية الزراعة</b></span></div>
     <div class="chip">قسم مبيدات الآفات</div>
   </div>
 
@@ -353,14 +355,7 @@ footer{border-top:1px solid var(--line);padding:22px 24px 34px;text-align:center
   </section>
 
   <div class="end reveal" id="end">
-    <svg class="seal" viewBox="0 0 120 120" aria-hidden="true">
-      <circle cx="60" cy="60" r="56" fill="none" stroke="#20372B" stroke-width="2"/>
-      <circle cx="60" cy="60" r="44" fill="#13241C"/>
-      <path d="M60 92 C60 76 59 66 61 50" stroke="#8FD06A" stroke-width="4" fill="none" stroke-linecap="round"/>
-      <path d="M60 72 C46 70 38 60 39 48 C52 49 60 58 60 72Z" fill="#8FD06A"/>
-      <path d="M61 62 C73 56 83 44 82 32 C69 35 60 47 61 62Z" fill="#C6EA4B"/>
-      <circle cx="61" cy="46" r="5" fill="#F2B33D"/>
-    </svg>
+    <img class="seal" src="logo.png" alt="شعار كلية الزراعة - جامعة المنوفية" width="128" height="128">
     <h3>علم يحمي…<br><span>وحصاد آمن</span></h3>
     <p>برنامج وقاية النبات · توجه مبيدات الآفات</p>
   </div>
