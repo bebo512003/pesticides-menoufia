@@ -171,6 +171,61 @@ h2.in .w{opacity:1;transform:none;filter:none}
 .plant-g.happy{animation:happy .8s cubic-bezier(.2,.9,.3,1.5)}
 @keyframes happy{40%{transform:scale(1.08,1.12)}}
 
+/* objectives tree */
+.otree{margin-top:18px;background:linear-gradient(180deg,#112219,#0D1A13);border:1px solid var(--line);border-radius:22px;padding:8px 12px 14px}
+.otree svg{width:100%;display:block}
+.ob{fill:none;stroke:#2C4A36;stroke-width:4;stroke-linecap:round;stroke-dasharray:260;stroke-dashoffset:260;transition:stroke .4s,stroke-width .4s}
+.otree.in .ob{animation:draw 1.2s calc(var(--i)*.12s + .2s) cubic-bezier(.6,0,.2,1) forwards}
+.ob.on{stroke:var(--leaf);stroke-width:5}
+.trunk{stroke-dasharray:140;stroke-dashoffset:140}
+.otree.in .trunk{animation:draw .8s cubic-bezier(.6,0,.2,1) forwards}
+.onode{cursor:pointer;outline:none}
+.onode:focus-visible circle.c{stroke:var(--lime);stroke-width:3}
+.onode circle.c{fill:#13241C;stroke:#2C4A36;stroke-width:2.5;transition:all .35s}
+.onode text{font-family:var(--display);font-weight:700;font-size:15px;fill:var(--muted);transition:fill .3s;pointer-events:none}
+.onode.on circle.c{fill:var(--lime);stroke:var(--lime)}
+.onode.on text{fill:#12200f}
+.onode .lf{transform-box:fill-box;transform-origin:center;transform:scale(0);transition:transform .45s cubic-bezier(.2,.9,.3,1.6)}
+.onode.on .lf{transform:scale(1)}
+.onode .ring{fill:none;stroke:var(--lime);stroke-width:1.5;opacity:0}
+.onode.on .ring{animation:halo 1.8s ease-out infinite}
+.otree .onode{opacity:0;transition:opacity .4s}
+.otree.in .onode{opacity:1;transition-delay:calc(var(--i)*.12s + .9s)}
+.ocard{min-height:118px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:6px}
+.ocard .k{font-family:var(--display);font-size:12px;color:var(--leaf)}
+.ocard h3{font-family:var(--display);font-weight:700;font-size:18px;margin:2px 0 4px}
+.ocard p{font-size:14px;color:var(--muted)}
+.ocard .anim{animation:cardIn .45s cubic-bezier(.2,.8,.2,1)}
+.odots{display:flex;justify-content:center;gap:6px;margin-top:10px}
+.odots i{width:7px;height:7px;border-radius:99px;background:#2C4A36;transition:all .3s}
+.odots i.on{width:20px;background:var(--lime)}
+.linkbtn{display:inline-flex;gap:6px;align-items:center;margin-top:12px;font-family:var(--display);font-size:13px;color:var(--leaf);padding:6px 2px}
+.objs[hidden]{display:none}
+
+/* courses: level switch + flip cards */
+.seg{position:relative;display:grid;grid-template-columns:1fr 1fr;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px;margin-top:18px}
+.seg button{position:relative;z-index:1;padding:9px 6px;font-family:var(--display);font-size:13.5px;font-weight:500;color:var(--muted);transition:color .3s}
+.seg button.on{color:#12200f}
+.seg .ind{position:absolute;top:4px;bottom:4px;right:4px;width:calc(50% - 4px);border-radius:10px;background:var(--lime);transition:transform .45s cubic-bezier(.2,.9,.3,1.2)}
+.seg[data-l="4"] .ind{transform:translateX(-100%)}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;perspective:900px}
+.fc{position:relative;height:132px;cursor:pointer;outline:none;animation:fcIn .5s calc(var(--i)*70ms) cubic-bezier(.2,.9,.3,1.3) both}
+@keyframes fcIn{from{opacity:0;transform:translateY(16px) scale(.92)}to{opacity:1;transform:none}}
+.fc .in2{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.fc.flip .in2{transform:rotateY(180deg)}
+.fc .fa,.fc .fb2{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;padding:12px;display:flex;flex-direction:column;justify-content:space-between;border:1px solid var(--line)}
+.fc .fa{background:var(--card)}
+.fc .fb2{background:linear-gradient(160deg,#1d3a27,#13241C);transform:rotateY(180deg);border-color:rgba(198,234,75,.35)}
+.fc .code{align-self:flex-start;font-family:var(--display);font-size:11.5px;font-weight:500;color:var(--bg);background:var(--leaf);border-radius:99px;padding:2px 10px}
+.fc .nm{font-family:var(--display);font-weight:700;font-size:15.5px;line-height:1.45}
+.fc .ty{font-size:11.5px;color:var(--muted)}
+.fc .ty.req{color:var(--amber)}
+.fc .hrs{display:flex;gap:6px}
+.fc .hrs div{flex:1;text-align:center;background:rgba(0,0,0,.18);border-radius:10px;padding:6px 2px}
+.fc .hrs b{display:block;font-family:var(--display);font-size:20px;color:var(--lime);line-height:1.2}
+.fc .hrs span{font-size:10.5px;color:var(--muted)}
+.fc .flipme{position:absolute;left:10px;top:10px;font-size:13px;color:var(--muted);opacity:.7}
+
 /* courses */
 .lvl{display:flex;align-items:center;gap:10px;margin:22px 0 10px;font-family:var(--display);font-size:13px;color:var(--muted)}
 .lvl::after{content:"";flex:1;height:1px;background:var(--line)}
@@ -192,6 +247,36 @@ h2.in .w{opacity:1;transform:none;filter:none}
 .rule b{display:block;font-family:var(--display);font-weight:500;font-size:15px;line-height:1.5;margin-bottom:2px}
 .rule p{font-size:13px;color:var(--muted);line-height:1.7}
 
+/* PPE dress-up */
+.ppe{margin-top:20px;background:linear-gradient(180deg,#1a1a10,#13180F);border:1px solid rgba(242,179,61,.28);border-radius:22px;padding:14px}
+.ppe-top{display:flex;justify-content:space-between;align-items:center}
+.ppe-top b{font-family:var(--display);font-weight:700;font-size:17px}
+.ppe-top span{font-family:var(--display);font-size:12px;color:var(--amber)}
+.ppe-body{display:grid;grid-template-columns:44% 1fr;gap:10px;align-items:center;margin-top:8px}
+.ppe svg{width:100%;display:block;overflow:visible}
+.pl{opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(.6);transition:opacity .35s,transform .45s cubic-bezier(.2,.9,.3,1.6)}
+.pl.on{opacity:1;transform:none}
+.mist circle{animation:mist 3s ease-in-out infinite}
+.mist circle:nth-child(2n){animation-duration:3.8s;animation-delay:-1s}
+.mist circle:nth-child(3n){animation-duration:2.6s;animation-delay:-2s}
+@keyframes mist{50%{transform:translate(4px,-8px)}}
+.mist{transition:opacity .5s}
+.pshield{fill:none;stroke:var(--lime);stroke-width:2.5;stroke-dasharray:720;stroke-dashoffset:720;transition:stroke-dashoffset 1s cubic-bezier(.6,0,.2,1)}
+.ppe.done .pshield{stroke-dashoffset:0}
+.ppe-btns{display:grid;gap:6px}
+.pbtn{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:12px;background:var(--card);border:1px solid var(--line);font-size:12.5px;white-space:nowrap;text-align:right;transition:all .25s}
+.pbtn i{font-style:normal;font-size:18px}
+.pbtn .ck{margin-right:auto;width:18px;height:18px;border-radius:50%;border:1.5px solid #3b5246;display:grid;place-items:center;font-size:11px;color:transparent;transition:all .3s}
+.pbtn.on{border-color:var(--leaf);background:rgba(143,208,106,.1)}
+.pbtn.on .ck{background:var(--leaf);border-color:var(--leaf);color:#12200f}
+.pbtn:active{transform:scale(.97)}
+.ppe-bar{height:8px;border-radius:99px;background:#2a2615;overflow:hidden;margin-top:12px}
+.ppe-bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--red),var(--amber));transition:width .5s cubic-bezier(.2,.8,.2,1),background .4s}
+.ppe.done .ppe-bar i{background:linear-gradient(90deg,var(--leaf),var(--lime))}
+.ppe-msg{font-size:13px;color:var(--muted);margin-top:8px;min-height:22px}
+.ppe.done .ppe-msg{color:var(--lime);font-family:var(--display);font-weight:500}
+.sub-h{font-family:var(--display);font-weight:500;font-size:14px;color:var(--muted);margin:22px 0 0}
+
 /* journey */
 .journey{margin-top:26px;position:relative;padding-right:0}
 .jline{position:absolute;right:21px;top:22px;bottom:22px;width:2px;background:var(--line)}
@@ -207,18 +292,24 @@ h2.in .w{opacity:1;transform:none;filter:none}
 .gscreen{display:none;padding:16px}
 .gscreen.on{display:block;animation:cardIn .45s cubic-bezier(.2,.8,.2,1)}
 .levels{display:grid;gap:10px;margin-top:12px}
-.lvbtn{display:flex;align-items:center;gap:14px;text-align:right;width:100%;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;transition:transform .15s,border-color .3s}
+.lvbtn{position:relative;display:flex;align-items:center;gap:14px;text-align:right;width:100%;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;transition:transform .15s,border-color .3s}
 .lvbtn:active{transform:scale(.98)}
 .lvbtn .badge{width:48px;height:48px;flex:0 0 48px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:rgba(143,208,106,.12)}
 .lvbtn b{font-family:var(--display);font-weight:700;font-size:16px;display:block}
 .lvbtn span{font-size:12.5px;color:var(--muted);display:block;line-height:1.6}
-.lvbtn .stars{margin-right:auto;font-size:14px;letter-spacing:1px;color:#3b5246;white-space:nowrap;display:flex;gap:1px}
+.lvbtn .stars{margin-top:4px;font-size:14px;letter-spacing:1px;color:#3b5246;white-space:nowrap;display:flex;gap:1px}
 .lvbtn .stars span{display:inline}
 .lvbtn .stars .s{color:var(--amber)}
 .ghint{font-size:13px;color:var(--muted)}
 .hud{display:flex;align-items:center;gap:10px;font-family:var(--display);font-size:12px;color:var(--muted)}
 .hud .lv{color:var(--leaf);font-weight:500}
-.hud .qn{margin-right:auto}
+.hud .lv{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hud .qn{white-space:nowrap}
+.gback{white-space:nowrap;flex:0 0 auto;font-family:var(--display);font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:3px 10px;transition:all .2s}
+.gback:active{transform:scale(.95)}
+.lvbtn.pro{border-color:rgba(242,179,61,.4);background:linear-gradient(160deg,#2a2412,#13241C)}
+.lvbtn.pro .badge{background:rgba(242,179,61,.15)}
+.lvbtn .tagp{display:inline-block;font-family:var(--display);font-size:10.5px;color:#1b1405;background:var(--amber);border-radius:99px;padding:0 8px;margin-right:6px;vertical-align:middle}
 .bar{height:8px;border-radius:99px;background:#1c2e24;overflow:hidden;margin-top:8px}
 .bar i{display:block;height:100%;width:100%;border-radius:99px;background:linear-gradient(90deg,var(--leaf),var(--lime));transition:width .6s cubic-bezier(.2,.8,.2,1),background .4s}
 .bar.low i{background:linear-gradient(90deg,var(--red),var(--amber))}
@@ -390,7 +481,17 @@ footer{border-top:1px solid var(--line);padding:22px 24px 34px;text-align:center
   <section class="stage" id="s4" data-stage>
     <div class="num reveal">٠٤ · الفروع</div>
     <h2 class="split">أهداف البرنامج</h2>
-    <ol class="objs">
+    <div class="otree reveal" id="otree">
+      <svg viewBox="0 0 360 178" aria-hidden="true">
+        <path class="ob trunk" d="M180 176 V118"/>
+        <g id="obr"></g>
+        <g id="onodes"></g>
+      </svg>
+      <div class="ocard" id="ocard" aria-live="polite"></div>
+      <div class="odots" id="odots"></div>
+    </div>
+    <button class="linkbtn" id="oAll">☰ عرض كل الأهداف كقائمة</button>
+    <ol class="objs" id="objsList" hidden>
       <li class="reveal" style="--d:0s"><div><b class="ot">إعداد كفاءات متميزة</b>تأهيل خريجين متميزين أكاديميًا ومهنيًا في مجال وقاية النبات ومبيدات الآفات.</div></li>
       <li class="reveal" style="--d:.08s"><div><b class="ot">تعزيز التنافسية في سوق العمل</b>تمكين الخريجين من المنافسة بكفاءة في أسواق العمل على المستويين المحلي والدولي.</div></li>
       <li class="reveal" style="--d:.16s"><div><b class="ot">دعم البحث العلمي والدراسات العليا</b>تهيئة الطلاب وتجهيزهم لاستكمال دراساتهم العليا في البرامج المتقدمة ذات الصلة.</div></li>
@@ -478,22 +579,10 @@ footer{border-top:1px solid var(--line);padding:22px 24px 34px;text-align:center
   <section class="stage" id="s6" data-stage>
     <div class="num reveal">٠٦ · الأوراق</div>
     <h2 class="split">ماذا ستدرس؟<small>مقررات مبيدات الآفات في البرنامج</small></h2>
-    <div class="lvl reveal"><span>المستوى الثالث</span></div>
-    <div class="chips">
-      <div class="crs reveal" style="--d:0s"><i>ت ٣٠٢</i>مبيدات آفات</div>
-      <div class="crs reveal" style="--d:.06s"><i>ت ٣٢١</i>مبيدات حشائش</div>
-      <div class="crs reveal" style="--d:.12s"><i>ت ٣٢٢</i>مبيدات حيوية</div>
-    </div>
-    <div class="lvl reveal"><span>المستوى الرابع</span></div>
-    <div class="chips">
-      <div class="crs reveal" style="--d:0s"><i>ت ٤٠٣</i>توكسيكولوجي</div>
-      <div class="crs reveal" style="--d:.06s"><i>ت ٤٢١</i>تحليل مبيدات</div>
-      <div class="crs reveal" style="--d:.12s"><i>ت ٤٢٢</i>مبيدات فطرية</div>
-      <div class="crs reveal" style="--d:.18s"><i>ت ٤٢٣</i>المكافحة الكيماوية للآفات</div>
-      <div class="crs reveal" style="--d:.24s"><i>ت ٤٢٤</i>مستحضرات مبيدات</div>
-      <div class="crs reveal" style="--d:.30s"><i>ت ٤٢٦</i>التقييم الحيوي للمبيدات</div>
-    </div>
-    <p class="src reveal">المصدر: دليل الطالب ٢٠٢٦/٢٠٢٧</p>
+    <div class="seg reveal" id="seg" data-l="3"><i class="ind"></i><button class="on" data-l="3">المستوى الثالث</button><button data-l="4">المستوى الرابع</button></div>
+    <div class="cgrid" id="cgrid"></div>
+    <p class="src" style="opacity:1">اضغط على أي مقرر عشان تقلبه وتشوف ساعاته.</p>
+    <p class="src reveal">المصدر: دليل الطالب ٢٠٢٦/٢٠٢٧ (الساعات: نظري · عملي · معتمدة)</p>
   </section>
 </main>
 
@@ -502,6 +591,69 @@ footer{border-top:1px solid var(--line);padding:22px 24px 34px;text-align:center
     <div class="warnbar reveal"></div>
     <div class="num reveal" style="color:var(--amber)">٠٧ · درع الحماية</div>
     <h2 class="split">مبادئ السلامة العامة<small>في الحقل والمعمل</small></h2>
+    <div class="ppe reveal" id="ppe">
+      <div class="ppe-top"><b>جهّز نفسك قبل الرش</b><span id="ppeCount">٠ من ٥</span></div>
+      <div class="ppe-body">
+        <svg viewBox="0 0 200 250" aria-hidden="true">
+          <g class="mist" id="pmist" fill="#E8664A">
+            <circle cx="26" cy="60" r="3"/><circle cx="170" cy="48" r="2.5"/><circle cx="18" cy="120" r="2.2"/><circle cx="182" cy="110" r="3"/>
+            <circle cx="40" cy="30" r="2"/><circle cx="160" cy="170" r="2.4"/><circle cx="30" cy="190" r="2.6"/><circle cx="176" cy="210" r="2"/>
+          </g>
+          <ellipse class="pshield" cx="100" cy="130" rx="92" ry="118"/>
+          <!-- body -->
+          <rect x="50" y="86" width="18" height="72" rx="9" fill="#4F6D8F"/><rect x="132" y="86" width="18" height="72" rx="9" fill="#4F6D8F"/>
+          <rect x="74" y="156" width="22" height="66" rx="8" fill="#34495E"/><rect x="104" y="156" width="22" height="66" rx="8" fill="#34495E"/>
+          <rect x="68" y="80" width="64" height="84" rx="16" fill="#4F6D8F"/>
+          <rect x="92" y="70" width="16" height="14" fill="#D9A77C"/>
+          <circle cx="100" cy="50" r="25" fill="#D9A77C"/>
+          <path d="M75 48 Q76 22 100 22 Q124 22 125 48 Q118 34 100 34 Q82 34 75 48Z" fill="#3A2A20"/>
+          <circle cx="91" cy="50" r="2.2" fill="#2a1d15"/><circle cx="109" cy="50" r="2.2" fill="#2a1d15"/>
+          <path d="M93 62 Q100 66 107 62" stroke="#8a5a3c" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <circle cx="59" cy="162" r="9" fill="#D9A77C"/><circle cx="141" cy="162" r="9" fill="#D9A77C"/>
+          <ellipse cx="85" cy="226" rx="15" ry="7" fill="#5A4632"/><ellipse cx="115" cy="226" rx="15" ry="7" fill="#5A4632"/>
+          <!-- coverall -->
+          <g class="pl" data-k="suit">
+            <rect x="48" y="84" width="22" height="76" rx="10" fill="#E9EEF2"/><rect x="130" y="84" width="22" height="76" rx="10" fill="#E9EEF2"/>
+            <rect x="72" y="150" width="26" height="72" rx="9" fill="#E9EEF2"/><rect x="102" y="150" width="26" height="72" rx="9" fill="#E9EEF2"/>
+            <rect x="66" y="78" width="68" height="88" rx="17" fill="#F4F7F9"/>
+            <path d="M100 80 V164" stroke="#B8C4CC" stroke-width="2"/><path d="M86 78 L100 92 L114 78" fill="none" stroke="#B8C4CC" stroke-width="2"/>
+            <rect x="66" y="118" width="68" height="6" fill="#C6EA4B" opacity=".8"/>
+          </g>
+          <!-- boots -->
+          <g class="pl" data-k="boots">
+            <path d="M72 198 h26 v24 q0 10 -10 10 h-20 q-8 0 -8 -6 q0 -6 12 -8z" fill="#2E7D4F"/>
+            <path d="M102 198 h26 v20 q12 2 12 8 q0 6 -8 6 h-20 q-10 0 -10 -10z" fill="#2E7D4F"/>
+          </g>
+          <!-- gloves -->
+          <g class="pl" data-k="gloves">
+            <rect x="48" y="146" width="22" height="12" rx="4" fill="#E0A21F"/><circle cx="59" cy="164" r="11" fill="#F2B33D"/>
+            <rect x="130" y="146" width="22" height="12" rx="4" fill="#E0A21F"/><circle cx="141" cy="164" r="11" fill="#F2B33D"/>
+          </g>
+          <!-- mask -->
+          <g class="pl" data-k="mask">
+            <path d="M76 52 L84 58 M124 52 L116 58" stroke="#8fa39a" stroke-width="2"/>
+            <rect x="83" y="54" width="34" height="20" rx="9" fill="#DCE6E0"/>
+            <circle cx="88" cy="68" r="6" fill="#7d8f87"/><circle cx="112" cy="68" r="6" fill="#7d8f87"/>
+          </g>
+          <!-- goggles -->
+          <g class="pl" data-k="goggles">
+            <path d="M75 46 H125" stroke="#2d4f63" stroke-width="3"/>
+            <rect x="80" y="40" width="40" height="15" rx="7" fill="rgba(124,198,232,.55)" stroke="#2d4f63" stroke-width="2.5"/>
+            <path d="M86 44 l6 0" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+          </g>
+        </svg>
+        <div class="ppe-btns" id="ppeBtns">
+          <button class="pbtn" data-k="goggles"><i>🥽</i>نظارة واقية<span class="ck">✓</span></button>
+          <button class="pbtn" data-k="mask"><i>😷</i>كمامة بمرشحات<span class="ck">✓</span></button>
+          <button class="pbtn" data-k="gloves"><i>🧤</i>قفازات<span class="ck">✓</span></button>
+          <button class="pbtn" data-k="suit"><i>🥼</i>أفرول واقٍ<span class="ck">✓</span></button>
+          <button class="pbtn" data-k="boots"><i>🥾</i>حذاء واقٍ<span class="ck">✓</span></button>
+        </div>
+      </div>
+      <div class="ppe-bar"><i id="ppeBar"></i></div>
+      <div class="ppe-msg" id="ppeMsg">اضغط على كل قطعة عشان تلبسها… الرذاذ الأحمر هو مصدر الخطر.</div>
+    </div>
+    <div class="sub-h reveal">المبادئ الثمانية</div>
     <div class="grid">%%RULES%%</div>
     <p class="src reveal">مستندة إلى مقرر «تطبيق المبيدات والسلامة المهنية» · قسم مبيدات الآفات</p>
   </div>
@@ -531,7 +683,7 @@ footer{border-top:1px solid var(--line);padding:22px 24px 34px;text-align:center
         <div class="levels" id="levels"></div>
       </div>
       <div class="gscreen" id="gPlay">
-        <div class="hud"><span class="lv" id="hLv"></span><span class="qn" id="hQn"></span></div>
+        <div class="hud"><button class="gback" id="gBack">→ رجوع</button><span class="lv" id="hLv"></span><span class="qn" id="hQn"></span></div>
         <div class="bar" id="hBar"><i id="hBarI"></i></div>
         <div class="barlbl"><span>صحة المحصول</span><span id="hPct">١٠٠٪</span></div>
         <div class="field" id="field">
@@ -649,7 +801,7 @@ if(N) draw();
 
 /* tap leaf burst (outside interactive widgets) */
 if(!RM) addEventListener('pointerdown',e=>{
-  if(e.target.closest('button,a,.game,.lab')) return;
+  if(e.target.closest('button,a,.game,.lab,.otree,.ppe,.fc,.seg')) return;
   for(let i=0;i<7;i++){
     const d=document.createElement('i'); d.className='burst';
     d.style.left=e.clientX+'px'; d.style.top=e.clientY+'px';
@@ -735,18 +887,66 @@ btns.forEach(b=>b.onclick=()=>run(b.dataset.m));
 new IntersectionObserver(es=>{if(es[0].isIntersecting&&!busy) walk(); else cancelAnimationFrame(walking)},{threshold:.2}).observe($('.lab'));
 setPest(pestX);
 
+/* ================= OBJECTIVES TREE ================= */
+const OB=[...$$('#objsList li')].map(li=>({t:li.querySelector('.ot').textContent,x:li.querySelector('.ot').nextSibling.textContent.trim()}));
+const NP=[[304,74],[252,34],[180,20],[108,34],[56,74]];
+const obr=$('#obr'), onodes=$('#onodes'), odots=$('#odots');
+NP.forEach(([x,y],i)=>{
+  obr.insertAdjacentHTML('beforeend',`<path class="ob" style="--i:${i}" id="ob${i}" d="M180 120 Q${180+(x-180)*.25} ${y+14} ${x} ${y+17}"/>`);
+  const lf=[[-14,-6,-30],[14,-6,30],[0,-16,0]].map(([dx,dy,r])=>`<ellipse class="lf" cx="${x+dx}" cy="${y+dy}" rx="9" ry="5" fill="#8FD06A" transform="rotate(${r} ${x+dx} ${y+dy})"/>`).join('');
+  onodes.insertAdjacentHTML('beforeend',`<g class="onode" style="--i:${i}" data-i="${i}" role="button" tabindex="0" aria-label="الهدف ${i+1}">${lf}<circle class="ring" cx="${x}" cy="${y}" r="17" style="transform-box:fill-box;transform-origin:center"/><circle class="c" cx="${x}" cy="${y}" r="17"/><text x="${x}" y="${y+5}" text-anchor="middle">${ar(i+1)}</text></g>`);
+  odots.insertAdjacentHTML('beforeend','<i></i>');
+});
+let oCur=-1, oAuto=null, oUser=false;
+function oShow(i){
+  oCur=i; $$('.onode').forEach((n,k)=>n.classList.toggle('on',k===i)); $$('.ob').forEach(b=>b.classList.remove('on')); $('#ob'+i).classList.add('on');
+  [...odots.children].forEach((d,k)=>d.classList.toggle('on',k===i));
+  $('#ocard').innerHTML=`<div class="anim"><div class="k">الهدف ${ar(i+1)} من ${ar(OB.length)}</div><h3>${OB[i].t}</h3><p>${OB[i].x}</p></div>`;
+}
+$$('.onode').forEach(n=>{const go=()=>{oUser=true;clearInterval(oAuto);oShow(+n.dataset.i)};n.addEventListener('click',go);n.addEventListener('keydown',e=>{if(e.key==='Enter')go()})});
+new IntersectionObserver(es=>{ if(es[0].isIntersecting){ if(oCur<0) setTimeout(()=>oShow(0),1300); if(!oUser&&!oAuto) oAuto=setInterval(()=>oShow((oCur+1)%OB.length),4500);} else {clearInterval(oAuto);oAuto=null} },{threshold:.3}).observe($('#otree'));
+$('#oAll').onclick=()=>{const l=$('#objsList');l.hidden=!l.hidden;$('#oAll').textContent=l.hidden?'☰ عرض كل الأهداف كقائمة':'✕ إخفاء القائمة'};
+
+/* ================= COURSES ================= */
+const CR={3:[['ت ٣٠٢','مبيدات آفات',1,2,2,3],['ت ٣٢١','مبيدات حشائش',0,2,2,3],['ت ٣٢٢','مبيدات حيوية',0,2,2,3]],
+          4:[['ت ٤٠٣','توكسيكولوجي',1,2,2,3],['ت ٤٢١','تحليل مبيدات',0,2,4,4],['ت ٤٢٢','مبيدات فطرية',0,2,2,3],['ت ٤٢٣','المكافحة الكيماوية للآفات',0,2,2,3],['ت ٤٢٤','مستحضرات مبيدات',0,2,2,3],['ت ٤٢٦','التقييم الحيوي للمبيدات',0,2,2,3]]};
+function renderCourses(l){
+  $('#seg').dataset.l=l; $$('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.l==l));
+  $('#cgrid').innerHTML=CR[l].map(([c,n,req,th,pr,cr],i)=>`<div class="fc" style="--i:${i}" role="button" tabindex="0"><div class="in2">
+    <div class="fa"><span class="code">${c}</span><div class="nm">${n}</div><div class="ty ${req?'req':''}">${req?'● إجباري تخصصي':'○ اختياري · توجه المبيدات'}</div><span class="flipme">↻</span></div>
+    <div class="fb2"><div class="nm" style="font-size:13.5px">${n}</div><div class="hrs"><div><b>${ar(th)}</b><span>نظري</span></div><div><b>${ar(pr)}</b><span>عملي</span></div><div><b>${ar(cr)}</b><span>معتمدة</span></div></div></div>
+  </div></div>`).join('');
+  $$('.fc').forEach(f=>{const t=()=>f.classList.toggle('flip');f.onclick=t;f.onkeydown=e=>{if(e.key==='Enter')t()}});
+}
+$$('#seg button').forEach(b=>b.onclick=()=>renderCourses(b.dataset.l));
+renderCourses(3);
+
+/* ================= PPE ================= */
+const PPE=['goggles','mask','gloves','suit','boots'], PN={goggles:'النظارة',mask:'الكمامة',gloves:'القفازات',suit:'الأفرول',boots:'الحذاء'};
+const worn=new Set();
+function ppeUpd(){
+  const n=worn.size; $('#ppeCount').textContent=`${ar(n)} من ${ar(5)}`; $('#ppeBar').style.width=(n/5*100)+'%';
+  $('#pmist').style.opacity=1-n/5; $('#ppe').classList.toggle('done',n===5);
+  const miss=PPE.filter(k=>!worn.has(k)).map(k=>PN[k]);
+  $('#ppeMsg').textContent=n===0?'اضغط على كل قطعة عشان تلبسها… الرذاذ الأحمر هو مصدر الخطر.':n===5?'✓ جاهز للرش بأمان: الحماية كاملة':`لسه ناقص: ${miss.join('، ')}`;
+}
+$$('.pbtn').forEach(b=>b.onclick=()=>{const k=b.dataset.k; worn.has(k)?worn.delete(k):worn.add(k);
+  b.classList.toggle('on',worn.has(k)); document.querySelector(`.pl[data-k="${k}"]`).classList.toggle('on',worn.has(k)); ppeUpd();});
+ppeUpd();
+
 /* ================= GAME ================= */
 const LV=[
  {n:'المتدرّب',e:'🌱',d:'أساسيات السلامة والتعامل الآمن',q:%%L1%%},
  {n:'المرشد الميداني',e:'🧭',d:'قرارات في الحقل: توقيت ورصد ومكافحة',q:%%L2%%},
- {n:'الخبير',e:'🏅',d:'مواقف صعبة: تسمم وتخزين وبيئة ومتبقيات',q:%%L3%%}
+ {n:'الخبير',e:'🏅',d:'مواقف صعبة: تسمم وتخزين وبيئة ومتبقيات',q:%%L3%%},
+ {n:'الاستشاري',e:'🎓',d:'للمتخصصين: سمية، صياغات، تحليل متبقيات، مقاومة',q:%%L4%%,pro:1}
 ];
 const G={lv:0,set:[],i:0,ok:0,hp:100};
 const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 function show(id){$$('.gscreen').forEach(s=>s.classList.toggle('on',s.id===id))}
 function renderLevels(){
   const best=store.get('pq-best')||{};
-  $('#levels').innerHTML=LV.map((l,i)=>{const s=best[i]||0;return `<button class="lvbtn" data-l="${i}"><div class="badge">${l.e}</div><div><b>المستوى ${ar(i+1)} · ${l.n}</b><span>${l.d}</span></div><div class="stars">${[0,1,2].map(k=>`<span class="${k<s?'s':''}">★</span>`).join('')}</div></button>`}).join('');
+  $('#levels').innerHTML=LV.map((l,i)=>{const s=best[i]||0;return `<button class="lvbtn${l.pro?' pro':''}" data-l="${i}"><div class="badge">${l.e}</div><div><b>المستوى ${ar(i+1)} · ${l.n}${l.pro?'<span class="tagp">صعب</span>':''}</b><span>${l.d}</span><div class="stars">${[0,1,2].map(k=>`<span class="${k<s?'s':''}">★</span>`).join('')}</div></div></button>`}).join('');
   $$('.lvbtn').forEach(b=>b.onclick=()=>start(+b.dataset.l));
 }
 function pick(l){
@@ -766,7 +966,7 @@ function start(l){
   $('#game').scrollIntoView({behavior:RM?'auto':'smooth',block:'start'});
 }
 function upd(){
-  $('#hLv').textContent=`المستوى ${ar(G.lv+1)} · ${LV[G.lv].n}`;
+  $('#hLv').textContent=`${LV[G.lv].e} ${LV[G.lv].n}`;
   $('#hQn').textContent=`الموقف ${ar(Math.min(G.i+1,5))} من ${ar(5)}`;
   $('#hBarI').style.width=G.hp+'%'; $('#hBar').classList.toggle('low',G.hp<=40); $('#hPct').textContent=ar(G.hp)+'٪';
 }
@@ -809,6 +1009,7 @@ function confetti(){
     c.animate([{transform:`translateY(-20px) rotate(0)`,opacity:1},{transform:`translateY(${g.offsetHeight*0.8}px) rotate(${360+Math.random()*360}deg)`,opacity:0}],{duration:1400+Math.random()*900,delay:Math.random()*300,easing:'cubic-bezier(.3,.6,.4,1)'}).onfinish=()=>c.remove();}
 }
 $('#rAgain').onclick=()=>start(G.lv);
+$('#gBack').onclick=()=>{renderLevels();show('gMenu');$('#game').scrollIntoView({behavior:RM?'auto':'smooth',block:'start'})};
 $('#rMenu').onclick=()=>{renderLevels();show('gMenu')};
 renderLevels();
 })();
